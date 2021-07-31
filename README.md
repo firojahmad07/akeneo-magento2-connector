@@ -1,0 +1,1 @@
+# akeneo-magento2-connector
