@@ -1,0 +1,146 @@
+<!-- Styles for grid view -->
+<style>
+    .AknFormContainer-Mappings .field-input,.AknFormContainer-Mappings .field-header,.AknFormContainer-Mappings .header-col {
+        display: inline-block;
+        vertical-align: top;
+        width: calc(33% - 3px);
+        border: none;
+    }
+    .limit-width-35 {
+        max-width: 35%;
+    }
+    .AknFormContainer-Mappings .AknForm-header.widget-header {
+        border-bottom: 2px solid #67768A;
+        margin-bottom: 10px;
+    }
+    .AknFormContainer-Mappings .AknSettingField,.AknFormContainer-Mappings .AknSettingChildField{
+        width: 80%;
+    }
+    .otherSetting {
+        overflow: auto;
+        max-height: 200px;
+    }
+    /* data mapping css */
+    .AknCatalogVolume-hint {
+        background: #F5F9FC;
+        display: flex;
+        padding: 5px;
+        font-size: 14px;
+        color: #67768A;
+        min-height: 80px;
+        align-items: center;
+    }
+    .AknCatalogVolume-icon--info {
+        background-size: 24px auto;
+        border-right: 1px #D9DDE2 solid;
+        background-position: 50%;
+        min-width: 65px;
+        margin-right: 16px;
+        background-image: url('../bundles/spygarshopify/images/icon-info.svg') !important;
+    }
+    .AknCatalogVolume-icon {
+        min-width: 70px;
+        min-height: 60px;
+        height: auto;
+        background-repeat: no-repeat;
+        background-position: 50% 15px;
+        background-size: 29px auto;
+        position: relative;
+    }
+    .AknButton--mapping{
+        margin-right: 2%;
+    }
+    .AknCatalogVolume-hintTitle {
+       flex-grow: 1;
+    }
+    .disabled_wrapper {
+        pointer-events: none;
+        opacity: 0.4;
+    }
+    /* end data mapping css */
+
+</style>
+
+<!-- //HTML for form grid view -->
+<div class="AknFormContainer AknFormContainer--withPadding  AknFormContainer-Mappings" style="width: 100%">
+    <div class="AknForm-header widget-header">
+        <div class="header-col AknSubsection-title">
+            <%- _.__('spygar_shopify.shopify.fields') %>
+        </div>
+        <div class="header-col AknSubsection-title">
+            <%- _.__('spygar_shopify.akeneo.fields') %>
+        </div>
+        <div class="header-col AknSubsection-title">
+            <%- _.__('spygar_shopify.akeneo.child_fields') %>
+        </div>
+    </div>
+    <div>
+        <div id="mapped-fields">
+            <!-- Input Field -->
+            <% _.each(fields, function (field, key) { %>
+                <div class="AknFieldContainer">
+                    <div class="field-header">
+                        <label class="AknFieldContainer-label">
+                            <%- _.__('undefined' !== typeof(field.label) ? field.label : field.name) %> <em>[<%- field.name %>]</em>
+                        </label>
+                    </div>
+                    <div class="field-input">
+                        <select name="<%- field.name %>" id="pim_enrich_entity_form_<%- field.name %>" class="select2 label-field AknSettingField attributeValue" <% if(field.name === 'sku') { %> disabled <% } %>>
+                            <option><%- _.__('Select Attribute') %></option>
+                            <% _.each(attributes, function(attribute) { %>
+                                <% if(!field.types || field.types.indexOf(attribute.type) !== -1 ) { %>
+                                    <option value="<%- attribute.code %>" >
+                                        <%- 'undefined' !== typeof(attribute.labels[currentLocale]) ? attribute.labels[currentLocale] : attribute.code  %>
+                                    </option>
+                                <% } %>
+                            <% }); %>
+                        </select>
+                        <% if('undefined' !== typeof(field.dynamic) && field.dynamic) %>
+                            <span class="AknButtonList-item AknIconButton AknIconButton--round  AknIconButton--remove delete-row" data-id="<%- key %>" data-name="<%- field.name %>" style="vertical-align: middle"></span>
+                        <% else if('undefined' !== typeof(field.tooltip) ) { %>
+                            <i class="AknIconButton icon-info-sign" data-toggle="tooltip" data-placement="right" data-original-title="<%- _.__(field.tooltip) %>."></i>
+                        <% } %>                    
+                    </div>
+                    <div class="field-input">
+                        <select name="<%- field.name %>" id="pim_enrich_entity_form_<%- field.name %>" class="select2 label-field AknSettingChildField attributeValue" data-wrapper="childmapping" <% if(field.name === 'configurable_product_status') { %> disabled <% } %>>
+                            <option><%- _.__('Select Attribute') %></option>
+                            <% _.each(attributes, function(attribute) { %>
+                                <% if(!field.types || field.types.indexOf(attribute.type) !== -1 ) { %>
+                                    <option value="<%- attribute.code %>" >                                        
+                                        <%- 'undefined' !== typeof(attribute.labels[currentLocale]) ? attribute.labels[currentLocale] : attribute.code  %>
+                                    </option>
+                                <% } %>
+                            <% }); %>
+                        </select>
+                        <% if('undefined' !== typeof(field.dynamic) && field.dynamic) %>
+                            <span class="AknButtonList-item AknIconButton AknIconButton--round  AknIconButton--remove delete-row" data-id="<%- key %>" data-name="<%- field.name %>" style="vertical-align: middle"></span>
+                        <% else if('undefined' !== typeof(field.tooltip) ) { %>
+                            <i class="AknIconButton icon-info-sign" data-toggle="tooltip" data-placement="left" data-original-title="<%- _.__(field.tooltip) %>."></i>
+                        <% } %>                    
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+    <div>
+        <div class="AknSubsection-title">
+            <%- _.__('Map more Standard Attributes') %>
+        </div>
+        <div class="field-group">
+            <div class="AknFieldContainer-header ">
+                <label title="Code" class="AknFieldContainer-label control-label required truncate">
+                    <%- _.__('Sylius Standard attribute code') %> <em>(required)</em>
+                </label>
+            </div>
+
+            <div class="field-input">
+                <input type="text" class="AknTextField label-field view-only" id="dynamic-filed-input">
+            </div>
+
+            <span class="AknButton AknButton--grey AknButton--small field-add">
+                <%- _.__('Add Field') %>
+            </span>
+        </div>
+    </div>
+    
+</div>

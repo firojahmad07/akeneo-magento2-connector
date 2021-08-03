@@ -1,0 +1,15 @@
+parameters:
+    spygar.shopify.base.step: Spygar\Shopify\Steps\BaseStep
+    
+services:
+    spygar.shopify.category_export:
+        class: '%spygar.shopify.base.step%'
+        public: true
+        arguments:
+            - 'category_export'
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            - '@shopify.reader.database.category'
+            - '@pim_connector.processor.normalization.category'
+            - '@spygar_shopify.writer.category'
+            - 10

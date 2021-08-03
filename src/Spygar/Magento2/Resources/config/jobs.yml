@@ -1,0 +1,17 @@
+parameters:
+    spygar.shopify.connector: "Spygar Shopify Connnector"
+    spygar.shopify.category.export: "spygar_shopify_category_export"
+    
+services:
+    spygar.shopify.category:
+        public: true
+        class: '%pim_connector.job.simple_job.class%'
+        arguments:
+            - "%spygar.shopify.category.export%"
+            - "@event_dispatcher"
+            - "@akeneo_batch.job_repository"
+            -
+                - "@spygar.shopify.category_export"
+        tags:
+            - { name: akeneo_batch.job, connector: "%spygar.shopify.connector%", type: "%pim_connector.job.export_type%" }
+        

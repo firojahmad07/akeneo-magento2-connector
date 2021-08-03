@@ -1,0 +1,53 @@
+pim_menu:
+    navigation:
+        spygar_shopify: Shopify Connector
+    tab:
+        spygar_shopify: Shopify Connector
+    item:
+        documentation: Documentation
+        credentials: Credentials
+        mappping: Attribute Mapping
+        api_connection: API Connection
+
+pim_enrich:
+    save.label: Save
+
+pim_title:
+    spygar_shopify_documentation: Documentation
+    spygar_shopify_credentials: Credentials
+  
+spygar_shopify:
+    shopify.fields: Shopify Fields
+    akeneo.fields: Akeneo Fields
+    akeneo.child_fields: Variant Product fields
+    tab:
+        credential: Credential
+        locales: Locale Mapping
+        attribute_mapping: Attribute Mapping
+    form:
+        properties.url: Url
+        properties.username: Username
+        properties.password: Password
+        properties.client_id: Client Id
+        properties.version: Version
+    credential:
+        id: Id
+        active: active
+        create: create
+        url: url
+        username: username
+        password: password
+        client_id: clientId
+        client_secret: clientSecret
+    attribute:
+        name: Name
+        price: Price
+        description: Description
+        short_description: Short Description
+        quantity: Quantity
+        enabled: Enabled
+        meta_keywords: Meta Keywords
+        meta_description: Meta Description
+        slug: Slug
+        channels: Channels
+        tracked: Tracked

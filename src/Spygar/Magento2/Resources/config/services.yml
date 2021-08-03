@@ -1,0 +1,18 @@
+parameters:
+    spygar.shopify.connector.service: Spygar\Shopify\Services\SpygarShopifyService
+    spygar.shopify.oauth.helper: Spygar\Shopify\Components\OAuthClientHelper
+
+services:
+    spygar.shopify.connector.service:
+        public: true
+        class: "%spygar.shopify.connector.service%"
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@spygar.shopify.credential.repository"
+
+    spygar.shopify.oauth_client.helper:
+        public: true
+        class: "%spygar.shopify.oauth.helper%"
+        arguments:
+            - "@spygar.shopify.connector.service"
+        

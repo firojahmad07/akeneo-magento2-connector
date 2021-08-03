@@ -1,0 +1,45 @@
+extensions:
+    spygar-shopify-attribute-mapping-index:
+        module: spygarmagento2/settings/tabs/mapping-configuration
+        
+    spygar-shopify-attribute-mapping-index-user-navigation:
+        module: pim/menu/user-navigation
+        parent: spygar-shopify-attribute-mapping-index
+        targetZone: user-menu
+        config:
+            userAccount: pim_menu.user.user_account
+            logout: pim_menu.user.logout
+
+    spygar-shopify-attribute-mapping-index-grid-title:
+        module: pim/common/grid-title
+        parent: spygar-shopify-attribute-mapping-index
+        targetZone: title
+        config:
+            title: pim_user_management.entity.user.page_title.index
+
+    spygar-shopify-attribute-mapping-index-breadcrumbs:
+        module: pim/common/breadcrumbs
+        parent: spygar-shopify-attribute-mapping-index
+        targetZone: breadcrumbs
+        config:
+            tab: pim-menu-akeneo-sylius
+            item: pim-menu-spygar-shopify-attribute-mapping
+
+    spygar-shopify-attribute-mapping-index-mapping:
+        module: spygarmagento2/settings/tabs/attribute-mapping
+        parent: spygar-shopify-attribute-mapping-index
+        targetZone: content
+        config:
+            title: sylius.attribute_mapping
+
+    #  Save Button
+    spygar-shopify-attribute-mapping-index-mapping-save:
+        module: spygarmagento2/settings/common/save
+        parent: spygar-shopify-attribute-mapping-index
+        targetZone: buttons
+        position: 100
+        config:
+            updateSuccessMessage: spygar_shopify.attribute_mapping.update_successful
+            updateFailureMessage: spygar_shopify.attribute_mapping.update_failed
+            notReadyMessage: spygar_shopify.attribute_mapping.field_not_ready
+            url: spygar_shopify_save_api_connection

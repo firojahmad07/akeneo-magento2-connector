@@ -1,0 +1,9 @@
+parameters:
+    spygar.shopify.entity.credential: Spygar\Shopify\Entity\Credentials
+services:
+    spygar.shopify.credential.repository:
+        public: true
+        class: Spygar\Shopify\Repository\CredentialsRepository
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%spygar.shopify.entity.credential%"

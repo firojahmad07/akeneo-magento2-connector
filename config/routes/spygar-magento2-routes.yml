@@ -1,0 +1,3 @@
+spygar_magento2_connector:
+    resource: "@SpygarMagento2Bundle/Resources/config/routes.yml"
+    prefix: /

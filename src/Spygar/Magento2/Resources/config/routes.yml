@@ -1,0 +1,60 @@
+#menu routes
+
+# documentation
+spygar_shopify_documentation:
+    path: /documentation
+    
+# credentials
+spygar_shopify_credentials:
+    path: /credentials
+
+# attribute mapping
+spygar_shopify_mapping:
+    path: /attribute-mapping
+
+spygar_shopify_api_connection:
+    path: /api-connection
+
+# credential routes
+spygar_shopify_edit_credential:
+    path: /edit/{id}
+
+spygar_shopify_create_credential:
+    path: /credential/create
+    defaults: { _controller: spygar.shopify.connector.credential.controller:create }
+
+spygar_shopify_delete_credential:
+    path: /credential/delete/{id}
+    defaults: { _controller: spygar.shopify.connector.credential.controller:delete }
+
+spygar_shopify_toggle_credential:
+    path: /credential/toggle/{id}
+    defaults: { _controller: spygar.shopify.connector.credential.controller:toggle }
+
+spygar_shopify_get_credential:
+    path: /credential/details/{id}
+    defaults: { _controller: spygar.shopify.connector.credential.controller:details }
+
+spygar_shopify_get_credentials:
+    path: /credential/list
+    defaults: { _controller: spygar.shopify.connector.credential.controller:getList }
+
+
+spygar_shopify_get_fields:
+    path: /rest/fields
+    defaults: { _controller: spygar.shopify.connector.controller:getFields }
+    methods: [GET]
+
+spygar_shopify_get_mapping:
+    path: /rest/get/mapping
+    defaults: { _controller: spygar.shopify.connector.controller:getMapping }
+
+# api connection
+spygar_shopify_get_api_connection:
+    path: /get/api-connection
+    defaults: { _controller: spygar.shopify.connector.controller:getApiConnection }
+
+spygar_shopify_save_api_connection:
+    path: /rest/save/api-connection
+    defaults: { _controller: spygar.shopify.connector.controller:saveApiConnection }
+    methods: ["POST", "PUT"]

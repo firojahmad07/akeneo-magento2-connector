@@ -1,0 +1,60 @@
+{% import 'PimUIBundle:Default:page_elements.html.twig' as elements %}
+
+{% block content %}
+
+    <div class="AknDefault-mainContent">
+        {{ elements.page_header(
+            {
+                title: 'pim_menu.item.documentation'|trans,
+                image: image is defined ? image : ''
+            }
+        ) }}
+
+        <div class="AknFooter">
+            <div class="AknFooter-item current-version">
+                <span>{{ 'Sylius Connector'|trans }}:</span>
+                <span>1.0.1</span>
+            </div>
+        </div>
+    </div>
+    <script nonce="{{ js_nonce() }}">
+        require(
+            [
+                'pim/common/breadcrumbs',
+                'pim/fetcher-registry',
+                'pim/form-builder',
+                'pim/form/common/user-main-image'
+            ],
+            function(
+                Breadcrumbs,
+                FetcherRegistry,
+                FormBuilder,
+                UserMainImage
+            ) {
+                $(function() {
+                    var breadcrumbs = new Breadcrumbs({
+                        config: {
+                            tab: 'pim-menu-akeneo-sylius',
+                            item: 'pim-menu-akeneo-sylius-documentation'
+                        }
+                    });
+                    breadcrumbs.configure().then(function () {
+                        breadcrumbs.render();
+                        $('*[data-drop-zone="breadcrumbs"]').append(breadcrumbs.$el);
+                    });
+
+                    FetcherRegistry.initialize().done(function () {
+                        FormBuilder.build('pim-menu-user-navigation').then(function (form) {
+                            $('.user-menu').append(form.el);
+                            form.render();
+                        }.bind(this));
+                    });
+
+                    const userMainImage = new UserMainImage({ config: {} });
+                    $('*[data-drop-zone="main-image"]').append(userMainImage.el);
+                    userMainImage.render();
+                });
+            }
+        );
+    </script>
+{% endblock %}

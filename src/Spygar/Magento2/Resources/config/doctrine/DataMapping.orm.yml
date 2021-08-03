@@ -1,0 +1,34 @@
+Spygar\Magento2\Entity\DataMapping:
+    type: entity
+    table: spygar_magento2_data_mapping
+    repositoryClass: Spygar\Magento2\Repository\DataMappingRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        entityType:
+            type: string
+            length: 255
+        code:
+            type: string
+            length: 255
+        externalId:
+            type: string
+            length: 255
+        relatedId:
+            type: string
+            length: 255
+            nullable: true
+            options:
+                default: null
+        shopUrl:
+            type: string
+            length: 255
+        created:
+            type: datetime
+            nullable: true
+    lifecycleCallbacks:
+        prePersist: [setCreatedAtValue]

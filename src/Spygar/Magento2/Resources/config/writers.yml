@@ -1,0 +1,5 @@
+services:
+  spygar_shopify.writer.category:
+    class: Spygar\Shopify\Connector\Export\Writer\CategoryWriter
+    arguments:
+        - "@spygar.shopify.connector.service"

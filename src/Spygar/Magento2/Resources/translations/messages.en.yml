@@ -1,0 +1,5 @@
+spygar_shopify:
+    credential:
+        id: Id
+        url: Shop url
+        active: Status

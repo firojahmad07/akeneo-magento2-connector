@@ -1,0 +1,55 @@
+extensions:
+   # Akeneo Sylius Menu
+    pim-menu-spygar-shopify:
+        module: pim/menu/tab
+        parent: pim-menu
+        position: 80
+        targetZone: mainMenu
+        config:
+            title: pim_menu.tab.spygar_shopify
+            iconModifier: iconSpygarShopifyConnector
+
+    pim-menu-spygar-shopify-column:
+        module: pim/menu/column
+        parent: pim-menu
+        position: 510
+        targetZone: column
+        config:
+            stateCode: pim-menu-spygar-shopify
+            tab: pim-menu-spygar-shopify
+            navigationTitle: pim_menu.navigation.spygar_shopify
+
+    pim-menu-spygar-shopify-navigation-block:
+        module: pim/menu/navigation-block
+        parent: pim-menu-spygar-shopify-column
+        position: 60
+        targetZone: navigation
+        config:
+            title: pim_menu.navigation.spygar_shopify
+# side bar menus
+    # docs
+    pim-menu-spygar-shopify-documentation:
+        module: pim/menu/item
+        parent: pim-menu-spygar-shopify-navigation-block
+        position: 90
+        config:
+            title: pim_menu.item.documentation
+            to: spygar_shopify_documentation
+
+    # credentials  
+    pim-menu-spygar-shopify-credentials:
+        module: pim/menu/item
+        parent: pim-menu-spygar-shopify-navigation-block
+        position: 100
+        config:
+            title: pim_menu.item.credentials
+            to: spygar_shopify_credentials
+
+    # attribute mapping
+    # pim-menu-spygar-shopify-mapping:
+    #     module: pim/menu/item
+    #     parent: pim-menu-spygar-shopify-navigation-block
+    #     position: 120
+    #     config:
+    #         title: pim_menu.item.mappping
+    #         to: spygar_shopify_mapping
