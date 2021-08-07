@@ -16,7 +16,7 @@ define(
              * {@inheritdoc}
              */
             renderForm: function () {
-                return FormBuilder.build('spygar-shopify-credentials-index')
+                return FormBuilder.build('spygar-magento2-credentials')
                     .then((form) => {
                         form.setElement(this.$el).render();
 

@@ -1,0 +1,81 @@
+<!-- Styles for grid view -->
+<style>
+    .AknFormContainer-Mappings .field-input,.AknFormContainer-Mappings .field-header,.AknFormContainer-Mappings .header-col {
+        display: inline-block;
+        vertical-align: top;
+        width: calc(25% - 3px);
+        border: none;
+    }
+    .limit-width-35 {
+        max-width: 35%;
+    }
+    .AknFormContainer-Mappings .AknForm-header.widget-header {
+        border-bottom: 2px solid #67768A;
+        margin-bottom: 10px;
+    }
+    .AknFormContainer-Mappings .AknSettingField,.AknFormContainer-Mappings .AknSettingChildField{
+        width: 80%;
+    }
+    /* end data mapping css */
+
+</style>
+
+<!-- //HTML for form grid view -->
+<div class="AknFormContainer AknFormContainer--withPadding  AknFormContainer-Mappings" style="width: 100%">
+    <div class="AknForm-header widget-header">
+        <div class="header-col AknSubsection-title">
+            <%- _.__('spygar_magento2.magento2.store') %>
+        </div>
+        <div class="header-col AknSubsection-title">
+            <%- _.__('spygar_magento2.akeneo.channel') %>
+        </div>
+        <div class="header-col AknSubsection-title">
+            <%- _.__('spygar_magento2.akeneo.locale') %>
+        </div>
+        <div class="header-col AknSubsection-title">
+            <%- _.__('spygar_magento2.akeneo.currency') %>
+        </div>
+    </div>
+    <div>
+        <div id="mapped-fields">
+            <div class="AknFieldContainer">
+                <% _.each(stores, function(store){ %> 
+                    <div class="field-header">
+                        <label class="AknFieldContainer-label">
+                            <em> <%- store.name %>(<%- store.code %>)</em>
+                        </label>
+                    </div>
+                    <div class="field-input">
+                        <select name="" id="pim_enrich_entity_form_" 
+                            class="select2 label-field AknSettingField" >
+                            <% _.each(channels, function(channel) { %> 
+                                <option value="<%- channel.code %>"><%- channel.label %></option>
+                            <% }) %>
+                        </select>                    
+                        <i class="AknIconButton icon-info-sign" data-toggle="tooltip" 
+                            data-placement="right" data-original-title="map store with akeneo channel"></i>
+                    </div>
+                    <div class="field-input">
+                        <select name="" id="pim_enrich_entity_form_" 
+                            class="select2 label-field AknSettingField" >
+                            <option>English</option>
+                            <option>French</option>
+                            <option>German</option>
+                        </select>                    
+                        <i class="AknIconButton icon-info-sign" data-toggle="tooltip" 
+                            data-placement="right" data-original-title="map store with akeneo local"></i>
+                    </div>
+                    <div class="field-input">
+                        <select name="" id="pim_enrich_entity_form_" 
+                            class="select2 label-field AknSettingField" >
+                            <option>USD</option>
+                            <option>EURO</option>
+                        </select>                    
+                        <i class="AknIconButton icon-info-sign" data-toggle="tooltip" 
+                            data-placement="left" data-original-title="map store with akeneo currency"></i>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@ define([
     renderForm: function () {
       console.log();
       return $.when(
-        FormBuilder.build('spygar-shopify-documentation'),
+        FormBuilder.build('spygar-magento2-documentation'),
         $.get(Routing.generate('oro_config_configuration_system_get'))
       ).then((form, response) => {
         this.on('pim:controller:can-leave', function (event) {

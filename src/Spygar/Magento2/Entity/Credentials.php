@@ -20,17 +20,7 @@ class Credentials
     /**
      * @var string
      */
-    private $apiKey;
-
-    /**
-     * @var string
-     */
-    private $password;
-
-    /**
-     * @var string
-     */
-    private $version;
+    private $accessToken;
 
     /**
      * @var bool
@@ -41,17 +31,15 @@ class Credentials
      * @var bool
      */
     private $defaultSet = 0;
-
     /**
-     * @var string|null
+     * @var json|null
      */
     private $resources;
 
     /**
-     * @var string|null
+     * @var json|null
      */
     private $extras;
-
 
     /**
      * Get id.
@@ -88,75 +76,27 @@ class Credentials
     }
 
     /**
-     * Set apiKey.
+     * Set accessToken.
      *
-     * @param string $apiKey
+     * @param string $accessToken
      *
      * @return Credentials
      */
-    public function setApiKey($apiKey)
+    public function setAccessToken($accessToken)
     {
-        $this->apiKey = $apiKey;
+        $this->accessToken = $accessToken;
 
         return $this;
     }
 
     /**
-     * Get apiKey.
+     * Get accessToken.
      *
      * @return string
      */
-    public function getApiKey()
+    public function getAccessToken()
     {
-        return $this->apiKey;
-    }
-
-    /**
-     * Set password.
-     *
-     * @param string $password
-     *
-     * @return Credentials
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password.
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Set version.
-     *
-     * @param string $version
-     *
-     * @return Credentials
-     */
-    public function setVersion($version)
-    {
-        $this->version = $version;
-
-        return $this;
-    }
-
-    /**
-     * Get version.
-     *
-     * @return string
-     */
-    public function getVersion()
-    {
-        return $this->version;
+        return $this->accessToken;
     }
 
     /**
@@ -210,7 +150,7 @@ class Credentials
     /**
      * Set resources.
      *
-     * @param string|null $resources
+     * @param json|null $resources
      *
      * @return Credentials
      */
@@ -224,7 +164,7 @@ class Credentials
     /**
      * Get resources.
      *
-     * @return string|null
+     * @return json|null
      */
     public function getResources()
     {
@@ -234,7 +174,7 @@ class Credentials
     /**
      * Set extras.
      *
-     * @param string|null $extras
+     * @param json|null $extras
      *
      * @return Credentials
      */
@@ -248,7 +188,7 @@ class Credentials
     /**
      * Get extras.
      *
-     * @return string|null
+     * @return json|null
      */
     public function getExtras()
     {

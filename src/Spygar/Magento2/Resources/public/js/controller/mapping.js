@@ -17,7 +17,7 @@ define(
              */
             renderForm: function () {            
                 return $.when(
-                    FormBuilder.build('spygar-shopify-attribute-mapping-index'),
+                    FormBuilder.build('spygar-magento2-attribute-mapping'),
                     $.get(Routing.generate("spygar_shopify_get_mapping"))
     
                 ).then((form, response) => {

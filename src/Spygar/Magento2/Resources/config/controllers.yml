@@ -3,13 +3,13 @@ services:
         public: true
         class: Spygar\Magento2\Controller\ShopifyController
         arguments:
-            - "@spygar.shopify.connector.service"
+            - "@spygar.magento2.connector.service"
 
-    spygar.shopify.connector.credential.controller:
+    spygar.magento2.connector.credential.controller:
         public: true
         class: Spygar\Magento2\Controller\Rest\CredentialController
         arguments:
-            - "@spygar.shopify.credential.repository"
+            - "@spygar.magento2.credential.repository"
             - "@doctrine.orm.entity_manager"
-            - "@spygar.shopify.oauth_client.helper"
+            - "@spygar.magento2.oauth_client.helper"
 

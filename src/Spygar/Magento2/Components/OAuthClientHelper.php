@@ -6,7 +6,8 @@ use Spygar\Magento2\Services\SpygarMagento2Service;
 class OAuthClientHelper
 {
     /** @var SpygarShopifyService */
-    private $spygarShopifyService;
+
+    protected $spygarShopifyService;
 
     public function __construct(SpygarMagento2Service $spygarShopifyService)
     {
@@ -23,8 +24,8 @@ class OAuthClientHelper
      */
     public function request($requestUrl, $payload, $method, $urlParameters = [])
     {
-        $client = new OAuthClient();
-        return $client->request($requestUrl, $payload, $method);
+        // $client = new OAuthClient();
+        // return $client->request($requestUrl, $payload, $method);
     }
     /**
      * Validate Sylius API Credential

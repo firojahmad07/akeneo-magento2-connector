@@ -17,8 +17,8 @@ define(
              */
             renderForm: function (route) {
                 return $.when(
-                    FormBuilder.build('akeneo-shopify-credential-edit-form'),
-                    $.get(Routing.generate("spygar_shopify_get_credential", { id: route.params.id} ))
+                    FormBuilder.build('spygar-magento2-credential-edit-form'),
+                    $.get(Routing.generate("spygar_magento2_get_credential", { id: route.params.id} ))
    
                 ).then((form, response) => {
                     this.on('pim:controller:can-leave', function (event) {

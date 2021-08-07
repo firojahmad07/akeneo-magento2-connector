@@ -1,11 +1,21 @@
 <?php
 namespace Spygar\Magento2\Components;
 
+use Spygar\Magento2\Traits\EndPointsTrait;
+
 class OAuthClient
 {
+    use EndPointsTrait;
+    
+    /** @var [] */
     private $activeCredential;
+
+    /** @var string */
     private $_url;
+
+    /** @var object */
     private $_curl;
+
     private $_method;
 
     private $apiKey;
@@ -15,9 +25,8 @@ class OAuthClient
     {
         $this->activeCredential = $activeCredential;
         $this->_url             = isset($this->activeCredential['url']) ? $this->activeCredential['url'] : "";
-        $this->apiKey           = isset($this->activeCredential['username']) ? $this->activeCredential['username'] : "";
-        $this->apiPassword      = isset($this->activeCredential['password']) ? $this->activeCredential['password'] : "";
-       
+        $this->accessToken      = isset($this->activeCredential['access_token']) ? $this->activeCredential['access_token'] : "";
+      
     }
 
     public function request($requestUrl, $payload, $method, $header = [])
@@ -65,27 +74,17 @@ class OAuthClient
         return $fullUrl;
 
     }
-    /** Get Sylius API End Points */
-    private $endPoints = 
-    [
-        "get_access_token"    => "{{url}}api/oauth/v2/token?",
-        "get_active_locals"   => "{{url}}api/v1/locales/?",
-        "validate_credentials"=> "{{url}}/admin/oauth/access_scopes.json"
-    ];
-
-    // https://k97d.myshopify.com/
+    
  
     public function createCurl($requestUrl, $payload = [], $method = "GET", $header = [])
     {
-        $this->_url = $this->generateApiUrl($requestUrl, []);        
-        \curl_setopt($this->_curl, CURLOPT_URL, $this->_url);
+        $this->_url = $this->generateApiUrl($requestUrl, []);  
       
-    //   \curl_setopt($this->_curl, CURLOPT_FOLLOWLOCATION, $this->_followlocation);
-    //   \curl_setopt($this->_curl, CURLOPT_COOKIEJAR,$this->_cookieFileLocation);
-    //   \curl_setopt($this->_curl, CURLOPT_COOKIEFILE,$this->_cookieFileLocation);
+        \curl_setopt($this->_curl, CURLOPT_URL, $this->_url);        
+        \curl_setopt($this->_curl, CURLOPT_RETURNTRANSFER, true);
+        \curl_setopt($this->_curl, CURLOPT_HTTPHEADER, $this->getRequestHeaders());
      
 
-        \curl_setopt($this->_curl, CURLOPT_HTTPHEADER, $this->getRequestHeaders());
         if(in_array($method, ['POST']))
         {
             \curl_setopt($this->_curl, CURLOPT_POST, true);
@@ -98,7 +97,7 @@ class OAuthClient
         curl_close($this->_curl);
         $responseData['data']   = json_decode($response, true);
         $responseData['status'] = $status;
-        
+
         return $responseData;
 
     }
@@ -110,7 +109,7 @@ class OAuthClient
             'Content-type: application/json',
             'Cache-Control: no-cache',
             'Cache-Control: max-age=0',
-            'Authorization: Basic ' . base64_encode($this->apiKey.":".$this->apiPassword),
+            'Authorization: Bearer ' .$this->accessToken,
         ];
     }
 

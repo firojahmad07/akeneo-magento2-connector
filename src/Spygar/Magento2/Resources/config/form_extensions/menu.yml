@@ -1,55 +1,47 @@
 extensions:
-   # Akeneo Sylius Menu
-    pim-menu-spygar-shopify:
+   # Akeneo Magento2 Menu
+    pim-menu-spygar-magento2:
         module: pim/menu/tab
         parent: pim-menu
         position: 80
         targetZone: mainMenu
         config:
-            title: pim_menu.tab.spygar_shopify
-            iconModifier: iconSpygarShopifyConnector
+            title: pim_menu.tab.spygar_magento2
+            iconModifier: iconSpygarMagento2Connector
 
-    pim-menu-spygar-shopify-column:
+    pim-menu-spygar-magento2-column:
         module: pim/menu/column
         parent: pim-menu
         position: 510
         targetZone: column
         config:
-            stateCode: pim-menu-spygar-shopify
-            tab: pim-menu-spygar-shopify
-            navigationTitle: pim_menu.navigation.spygar_shopify
+            stateCode: pim-menu-spygar-magento2
+            tab: pim-menu-spygar-magento2
+            navigationTitle: pim_menu.navigation.spygar_magento2
 
-    pim-menu-spygar-shopify-navigation-block:
+    pim-menu-spygar-magento2-navigation-block:
         module: pim/menu/navigation-block
-        parent: pim-menu-spygar-shopify-column
+        parent: pim-menu-spygar-magento2-column
         position: 60
         targetZone: navigation
         config:
-            title: pim_menu.navigation.spygar_shopify
+            title: pim_menu.navigation.spygar_magento2
+            
 # side bar menus
     # docs
-    pim-menu-spygar-shopify-documentation:
+    pim-menu-spygar-magento2-documentation:
         module: pim/menu/item
-        parent: pim-menu-spygar-shopify-navigation-block
+        parent: pim-menu-spygar-magento2-navigation-block
         position: 90
         config:
             title: pim_menu.item.documentation
-            to: spygar_shopify_documentation
+            to: spygar_magento2_documentation
 
     # credentials  
-    pim-menu-spygar-shopify-credentials:
+    pim-menu-spygar-magento2-credentials:
         module: pim/menu/item
-        parent: pim-menu-spygar-shopify-navigation-block
+        parent: pim-menu-spygar-magento2-navigation-block
         position: 100
         config:
             title: pim_menu.item.credentials
-            to: spygar_shopify_credentials
-
-    # attribute mapping
-    # pim-menu-spygar-shopify-mapping:
-    #     module: pim/menu/item
-    #     parent: pim-menu-spygar-shopify-navigation-block
-    #     position: 120
-    #     config:
-    #         title: pim_menu.item.mappping
-    #         to: spygar_shopify_mapping
+            to: spygar_magento2_credentials

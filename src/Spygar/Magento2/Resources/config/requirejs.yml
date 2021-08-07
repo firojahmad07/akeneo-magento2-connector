@@ -11,6 +11,7 @@ config:
         spygarmagento2/settings/tabs/attribute-mapping: spygarmagento2/js/settings/tabs/attribute-mapping
         spygarmagento2/settings/tabs/mapping-configuration: spygarmagento2/js/settings/tabs/mapping-configuration
         spygarmagento2/settings/tabs/documentation: spygarmagento2/js/settings/tabs/documentation
+        spygarmagento2/settings/tabs/stores: spygarmagento2/js/settings/tabs/stores
         # spygarmagento2/settings/tabs/api-connection: spygarmagento2/js/settings/tabs/api-connection
         
         # common
@@ -31,6 +32,7 @@ config:
         spygarmagento2/templates/credential/locale-mapping: spygarmagento2/templates/credential/locale-mapping.html
         spygarmagento2/templates/tab/mapping: spygarmagento2/templates/tab/mapping.html
         spygarmagento2/templates/tab/documentation: spygarmagento2/templates/tab/documentation.html
+        spygarmagento2/templates/tab/stores: spygarmagento2/templates/tab/stores.html
         # spygarmagento2/templates/tab/api-connection: spygarmagento2/templates/tab/api-connection.html
         ## common templates
         spygarmagento2/templates/tab/locales: spygarmagento2/templates/common/locales.html
@@ -41,11 +43,11 @@ config:
         pim/controller-registry:
             controllers:  
              # akeneo api connection
-                spygar_shopify_documentation:
+                spygar_magento2_documentation:
                     module: spygarmagento2/controller/documentation
 
                 # credential controller
-                spygar_shopify_credentials:
+                spygar_magento2_credentials:
                     module: spygarmagento2/controller/credentials
 
                 # attribute mapping controller
@@ -53,7 +55,7 @@ config:
                     module: spygarmagento2/controller/mapping
 
                 # credential edit controller
-                spygar_shopify_edit_credential:
+                spygar_magento2_edit_credential:
                     module: spygarmagento2/controller/edit-credential
 
                

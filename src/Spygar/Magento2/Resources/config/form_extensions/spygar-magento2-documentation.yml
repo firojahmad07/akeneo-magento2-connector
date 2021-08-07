@@ -1,58 +1,58 @@
 extensions:
-    spygar-shopify-documentation:
+    spygar-magento2-documentation:
         module: oro/form/system/config
 
-    spygar-shopify-documentation-breadcrumbs:
+    spygar-magento2-documentation-breadcrumbs:
         module: pim/common/breadcrumbs
-        parent: spygar-shopify-documentation
+        parent: spygar-magento2-documentation
         targetZone: breadcrumbs
         config:
-            tab: pim-menu-spygar-shopify
-            item: pim-menu-spygar-shopify-documentation
+            tab: pim-menu-spygar-magento2
+            item: pim_menu.item.documentation
 
-    spygar-shopify-documentation-title:
+    spygar-magento2-documentation-title:
         module: pim/common/grid-title
-        parent: spygar-shopify-documentation
+        parent: spygar-magento2-documentation
         targetZone: title
         config:
-            title: pim-menu-spygar-shopify-documentation
+            title: pim_menu.item.documentation
             countable: false
 
-    spygar-shopify-documentation-user-navigation:
+    spygar-magento2-documentation-user-navigation:
         module: pim/menu/user-navigation
-        parent: spygar-shopify-documentation
+        parent: spygar-magento2-documentation
         targetZone: user-menu
         config:
             userAccount: pim_menu.user.user_account
             logout: pim_menu.user.logout
 
-    spygar-shopify-documentation-config-tabs:
+    spygar-magento2-documentation-config-tabs:
         module: pim/form/common/form-tabs
-        parent: spygar-shopify-documentation
+        parent: spygar-magento2-documentation
         targetZone: content
         position: 100
 
-    # spygar-shopify-documentation-config-save:
+    # spygar-magento2-documentation-config-save:
     #     module: oro/form/system/config/save
-    #     parent: spygar-shopify-documentation
+    #     parent: spygar-magento2-documentation
     #     targetZone: buttons
     #     position: 100
 
-    spygar-shopify-documentation-config-tab-docs:
+    spygar-magento2-documentation-config-tab-docs:
         module: spygarmagento2/settings/tabs/documentation
-        parent: spygar-shopify-documentation-config-tabs
+        parent: spygar-magento2-documentation-config-tabs
         targetZone: container
         position: 100
 
-    # spygar-shopify-documentation-config-tab-notification:
+    # spygar-magento2-documentation-config-tab-notification:
     #     module: oro/form/system/config/tab/notification
-    #     parent: spygar-shopify-documentation-config-tabs
+    #     parent: spygar-magento2-documentation-config-tabs
     #     targetZone: container
     #     position: 110
 
-    spygar-shopify-documentation-state:
+    spygar-magento2-documentation-state:
         module: pim/form/common/state
-        parent: spygar-shopify-documentation
+        parent: spygar-magento2-documentation
         targetZone: state
         position: 900
         config:

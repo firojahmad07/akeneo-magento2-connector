@@ -6,7 +6,7 @@ services:
         arguments:
             - '@pim_catalog.repository.channel'
             - '@pim_catalog.repository.locale'
-            - '@spygar.shopify.credential.repository'
+            - '@spygar.magento2.credential.repository'
             - '@akeneo_pim_enrichment.job.job_parameters.constraint_collection_provider.simple_csv_import'
             - [ '%spygar.shopify.category.export%' ]
         tags:

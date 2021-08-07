@@ -1,5 +1,5 @@
-spygar_shopify:
+spygar_magento2:
     credential:
         id: Id
-        url: Shop url
+        url: Url
         active: Status

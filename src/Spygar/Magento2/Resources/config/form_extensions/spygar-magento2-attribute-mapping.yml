@@ -1,41 +1,41 @@
 extensions:
-    spygar-shopify-attribute-mapping-index:
+    spygar-magento2-attribute-mapping:
         module: spygarmagento2/settings/tabs/mapping-configuration
         
-    spygar-shopify-attribute-mapping-index-user-navigation:
+    spygar-magento2-attribute-mapping-user-navigation:
         module: pim/menu/user-navigation
-        parent: spygar-shopify-attribute-mapping-index
+        parent: spygar-magento2-attribute-mapping
         targetZone: user-menu
         config:
             userAccount: pim_menu.user.user_account
             logout: pim_menu.user.logout
 
-    spygar-shopify-attribute-mapping-index-grid-title:
+    spygar-magento2-attribute-mapping-grid-title:
         module: pim/common/grid-title
-        parent: spygar-shopify-attribute-mapping-index
+        parent: spygar-magento2-attribute-mapping
         targetZone: title
         config:
             title: pim_user_management.entity.user.page_title.index
 
-    spygar-shopify-attribute-mapping-index-breadcrumbs:
+    spygar-magento2-attribute-mapping-breadcrumbs:
         module: pim/common/breadcrumbs
-        parent: spygar-shopify-attribute-mapping-index
+        parent: spygar-magento2-attribute-mapping
         targetZone: breadcrumbs
         config:
             tab: pim-menu-akeneo-sylius
             item: pim-menu-spygar-shopify-attribute-mapping
 
-    spygar-shopify-attribute-mapping-index-mapping:
+    spygar-magento2-attribute-mapping-mapping:
         module: spygarmagento2/settings/tabs/attribute-mapping
-        parent: spygar-shopify-attribute-mapping-index
+        parent: spygar-magento2-attribute-mapping
         targetZone: content
         config:
             title: sylius.attribute_mapping
 
     #  Save Button
-    spygar-shopify-attribute-mapping-index-mapping-save:
+    spygar-magento2-attribute-mapping-mapping-save:
         module: spygarmagento2/settings/common/save
-        parent: spygar-shopify-attribute-mapping-index
+        parent: spygar-magento2-attribute-mapping
         targetZone: buttons
         position: 100
         config:

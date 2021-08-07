@@ -4,6 +4,7 @@ namespace Spygar\Magento2\Controller\Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\NotFoundHttpException;
 use Spygar\Magento2\Entity\Credentials;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Spygar\Magento2\Components\OAuthClientHelper;
@@ -36,8 +37,8 @@ class CredentialController extends AbstractController
     public function create(Request $request)
     {
         $params = json_decode($request->getContent(), true);
+      
         $data   = [];
-
         if (isset($params['id'])) {
             $credential = $this->credentialRepository->findOneById($params['id']); 
             $credential = !empty($credential) ? $credential : new Credentials;            
@@ -47,15 +48,14 @@ class CredentialController extends AbstractController
        
 
         $validateCredential = $this->oauthClientHelper->validateCredential($params);
-
+      
         if (200 == $validateCredential['status'])
         {
+
             $credential->setUrl($params["url"]);
-            $credential->setApiKey($params["username"]);
-            $credential->setPassword($params["password"]);
-            $credential->setVersion($params['version']);
+            $credential->setAccessToken($params["access_token"]);
+            $credential->setResources(json_encode($validateCredential['data']));
             $credential->setActive(true);
-    
             $this->entityManager->persist($credential);
             $this->entityManager->flush();
     
@@ -64,10 +64,8 @@ class CredentialController extends AbstractController
             ];
             
         } 
-
-        // dump($data);die;
+       
         return new JsonResponse($data);
-        // return new Response($content);
     }
 
     /**
@@ -103,9 +101,9 @@ class CredentialController extends AbstractController
     {
         $credential = $id;
         if (!$credential) {
-            throw new NotFoundHttpException(
-                sprintf('Instance with id "%s" not found', $id)
-            );
+            // throw new NotFoundHttpException(
+            //     sprintf('Instance with id "%s" not found', $id)
+            // );
         }
 
         $this->entityManager->remove($credential);

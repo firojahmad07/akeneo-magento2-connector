@@ -1,22 +1,23 @@
 pim_menu:
     navigation:
-        spygar_shopify: Shopify Connector
+        spygar_magento2: Magento2 Connector
     tab:
-        spygar_shopify: Shopify Connector
+        spygar_magento2: Magento2 Connector
     item:
         documentation: Documentation
+            # tab:
+            #     docs: How to use
         credentials: Credentials
         mappping: Attribute Mapping
-        api_connection: API Connection
 
 pim_enrich:
     save.label: Save
 
 pim_title:
-    spygar_shopify_documentation: Documentation
-    spygar_shopify_credentials: Credentials
+    spygar_magento2_documentation: Documentation
+    spygar_magento2_credentials: Credentials
   
-spygar_shopify:
+spygar_magento2:
     shopify.fields: Shopify Fields
     akeneo.fields: Akeneo Fields
     akeneo.child_fields: Variant Product fields

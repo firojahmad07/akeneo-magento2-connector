@@ -14,7 +14,7 @@ define([
       'change select': 'updateModel',
     },
     isGroup: true,
-    label: __(' pim-menu-spygar-shopify-documentation.docs'),
+    label: __('pim_menu.item.documentation.tab.docs'),
     template: _.template(template),
     code: 'docs',
 

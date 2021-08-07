@@ -1,11 +1,11 @@
 #menu routes
 
 # documentation
-spygar_shopify_documentation:
+spygar_magento2_documentation:
     path: /documentation
     
 # credentials
-spygar_shopify_credentials:
+spygar_magento2_credentials:
     path: /credentials
 
 # attribute mapping
@@ -16,28 +16,28 @@ spygar_shopify_api_connection:
     path: /api-connection
 
 # credential routes
-spygar_shopify_edit_credential:
-    path: /edit/{id}
+spygar_magento2_edit_credential:
+    path: /credential/edit/{id}
 
-spygar_shopify_create_credential:
+spygar_magento2_create_credential:
     path: /credential/create
-    defaults: { _controller: spygar.shopify.connector.credential.controller:create }
+    defaults: { _controller: spygar.magento2.connector.credential.controller:create }
 
-spygar_shopify_delete_credential:
+spygar_magento2_delete_credential:
     path: /credential/delete/{id}
-    defaults: { _controller: spygar.shopify.connector.credential.controller:delete }
+    defaults: { _controller: spygar.magento2.connector.credential.controller:delete }
 
-spygar_shopify_toggle_credential:
+spygar_magento2_toggle_credential:
     path: /credential/toggle/{id}
-    defaults: { _controller: spygar.shopify.connector.credential.controller:toggle }
+    defaults: { _controller: spygar.magento2.connector.credential.controller:toggle }
 
-spygar_shopify_get_credential:
+spygar_magento2_get_credential:
     path: /credential/details/{id}
-    defaults: { _controller: spygar.shopify.connector.credential.controller:details }
+    defaults: { _controller: spygar.magento2.connector.credential.controller:details }
 
 spygar_shopify_get_credentials:
     path: /credential/list
-    defaults: { _controller: spygar.shopify.connector.credential.controller:getList }
+    defaults: { _controller: spygar.magento2.connector.credential.controller:getList }
 
 
 spygar_shopify_get_fields:
