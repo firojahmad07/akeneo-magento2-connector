@@ -36,34 +36,38 @@ class CredentialController extends AbstractController
 
     public function create(Request $request)
     {
-        $params = json_decode($request->getContent(), true);
-      
-        $data   = [];
+        $params    = json_decode($request->getContent(), true);
+        $data      = [];
+        // $resources = [];
         if (isset($params['id'])) {
             $credential = $this->credentialRepository->findOneById($params['id']); 
+            // $resources  = !empty($credential) ? $credential->getResources() : [];
             $credential = !empty($credential) ? $credential : new Credentials;            
         } else {
             $credential = new Credentials;   
         }
        
-
-        $validateCredential = $this->oauthClientHelper->validateCredential($params);
+       
+        // $validateCredential = $this->oauthClientHelper->validateCredential($params);
       
-        if (200 == $validateCredential['status'])
-        {
+        // if (200 == $validateCredential['status'])
+        // {
 
             $credential->setUrl($params["url"]);
             $credential->setAccessToken($params["access_token"]);
-            $credential->setResources(json_encode($validateCredential['data']));
+            // $credential->setResources(json_encode([$params]));
+            $credential->setExtras(json_encode([$params]));
+            // $credential->setResources(json_encode($validateCredential['data']));
             $credential->setActive(true);
             $this->entityManager->persist($credential);
             $this->entityManager->flush();
     
             $data['meta'] = [
+                // "id" => 1
                 "id" => $credential->getId(),
             ];
             
-        } 
+        // } 
        
         return new JsonResponse($data);
     }

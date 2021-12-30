@@ -4,6 +4,7 @@ config:
         spygarmagento2/controller/mapping: spygarmagento2/js/controller/mapping
         spygarmagento2/controller/edit-credential: spygarmagento2/js/controller/edit-credential
         spygarmagento2/controller/documentation: spygarmagento2/js/controller/documentation
+        spygarmagento2/controller/configurations: spygarmagento2/js/controller/configurations
         # spygarmagento2/controller/api-connection: spygarmagento2/js/controller/api-connection
         
 
@@ -12,6 +13,7 @@ config:
         spygarmagento2/settings/tabs/mapping-configuration: spygarmagento2/js/settings/tabs/mapping-configuration
         spygarmagento2/settings/tabs/documentation: spygarmagento2/js/settings/tabs/documentation
         spygarmagento2/settings/tabs/stores: spygarmagento2/js/settings/tabs/stores
+        spygarmagento2/settings/tabs/media: spygarmagento2/js/settings/tabs/media
         # spygarmagento2/settings/tabs/api-connection: spygarmagento2/js/settings/tabs/api-connection
         
         # common
@@ -33,6 +35,7 @@ config:
         spygarmagento2/templates/tab/mapping: spygarmagento2/templates/tab/mapping.html
         spygarmagento2/templates/tab/documentation: spygarmagento2/templates/tab/documentation.html
         spygarmagento2/templates/tab/stores: spygarmagento2/templates/tab/stores.html
+        spygarmagento2/templates/tab/media: spygarmagento2/templates/tab/media.html
         # spygarmagento2/templates/tab/api-connection: spygarmagento2/templates/tab/api-connection.html
         ## common templates
         spygarmagento2/templates/tab/locales: spygarmagento2/templates/common/locales.html
@@ -49,6 +52,9 @@ config:
                 # credential controller
                 spygar_magento2_credentials:
                     module: spygarmagento2/controller/credentials
+
+                spygar_magento2_configurations:
+                    module: spygarmagento2/controller/configurations
 
                 # attribute mapping controller
                 spygar_shopify_mapping:

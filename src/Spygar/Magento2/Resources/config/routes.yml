@@ -7,13 +7,9 @@ spygar_magento2_documentation:
 # credentials
 spygar_magento2_credentials:
     path: /credentials
-
-# attribute mapping
-spygar_shopify_mapping:
-    path: /attribute-mapping
-
-spygar_shopify_api_connection:
-    path: /api-connection
+spygar_magento2_configurations:
+    path: /configurations
+    
 
 # credential routes
 spygar_magento2_edit_credential:

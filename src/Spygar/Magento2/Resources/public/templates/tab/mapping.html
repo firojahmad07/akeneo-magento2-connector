@@ -81,15 +81,23 @@
                 <div class="AknFieldContainer">
                     <div class="field-header">
                         <label class="AknFieldContainer-label">
-                            <%- _.__('undefined' !== typeof(field.label) ? field.label : field.name) %> <em>[<%- field.name %>]</em>
+                            <%- _.__('undefined' !== typeof(field.label) ? field.label : field.name) %> 
+                            <em>[<%- field.name %>]</em>
                         </label>
                     </div>
                     <div class="field-input">
-                        <select name="<%- field.name %>" id="pim_enrich_entity_form_<%- field.name %>" class="select2 label-field AknSettingField attributeValue" <% if(field.name === 'sku') { %> disabled <% } %>>
+                        <select name="<%- field.name %>" id="pim_enrich_entity_form_<%- field.name %>" 
+                            class="select2 label-field AknSettingField attributeValue" 
+                            data-wrapper="parentAttributes"
+                            <% if(field.name === 'sku') { %> disabled <% } %>>
                             <option><%- _.__('Select Attribute') %></option>
                             <% _.each(attributes, function(attribute) { %>
                                 <% if(!field.types || field.types.indexOf(attribute.type) !== -1 ) { %>
-                                    <option value="<%- attribute.code %>" >
+                                    <% selectedOption = !_.isUndefined(formData.parentAttributes) 
+                                                        && !_.isUndefined(formData.parentAttributes[field.name]) 
+                                                        ? formData.parentAttributes[field.name] : '' %>
+                                    <option value="<%- attribute.code %>" 
+                                        <% if(selectedOption === attribute.code) { %> selected="selected" <% } %>>
                                         <%- 'undefined' !== typeof(attribute.labels[currentLocale]) ? attribute.labels[currentLocale] : attribute.code  %>
                                     </option>
                                 <% } %>
@@ -102,11 +110,18 @@
                         <% } %>                    
                     </div>
                     <div class="field-input">
-                        <select name="<%- field.name %>" id="pim_enrich_entity_form_<%- field.name %>" class="select2 label-field AknSettingChildField attributeValue" data-wrapper="childmapping" <% if(field.name === 'configurable_product_status') { %> disabled <% } %>>
+                        <select name="<%- field.name %>" id="pim_enrich_entity_form_<%- field.name %>" 
+                            class="select2 label-field AknSettingChildField attributeValue" 
+                            data-wrapper="variantAttributes" 
+                            <% if(field.name === 'configurable_product_status') { %> disabled <% } %>>
+                            <% variantSelectedOption = !_.isUndefined(formData.variantAttributes) 
+                                                && !_.isUndefined(formData.variantAttributes[field.name]) 
+                                                ? formData.variantAttributes[field.name] : '' %>
                             <option><%- _.__('Select Attribute') %></option>
                             <% _.each(attributes, function(attribute) { %>
                                 <% if(!field.types || field.types.indexOf(attribute.type) !== -1 ) { %>
-                                    <option value="<%- attribute.code %>" >                                        
+                                    <option value="<%- attribute.code %>" 
+                                        <% if(variantSelectedOption == attribute.code ) { %> selected="selected" <% } %>>                                        
                                         <%- 'undefined' !== typeof(attribute.labels[currentLocale]) ? attribute.labels[currentLocale] : attribute.code  %>
                                     </option>
                                 <% } %>
@@ -142,5 +157,36 @@
             </span>
         </div>
     </div>
-    
+    <div>
+        <div class="AknSubsection-title">
+            <%- _.__('Export Custom Attributes') %>
+        </div>
+        <div class="field-group">
+            <div class="AknFieldContainer-header ">
+                <label title="Code" class="AknFieldContainer-label control-label required truncate">
+                    <%- _.__('Custom Attributes') %> <em>(required)</em>
+                </label>
+            </div>
+
+            <div class="field-input">
+                <select name="custom-attributes" id="pim_enrich_entity_form_custom_attributes"
+                    class="select2 label-field AknSettingChildField attributeValue" 
+                    data-wrapper="custmAttributes" multiple>
+                    <option><%- _.__('Select Attribute') %></option>
+                    <% _.each(attributes, function(attribute) { %>
+                        <option value="<%- attribute.code %>" >                                        
+                            <%- 'undefined' !== typeof(attribute.labels[currentLocale]) ? attribute.labels[currentLocale] : attribute.code  %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+            
+            <span class="AknButton AknButton--grey AknButton--small field-add">
+                <%- _.__('Add Attribute') %>
+            </span>
+            <span class="AknButton AknButton--grey AknButton--small field-add">
+                <%- _.__('Remove Attribute') %>
+            </span>
+        </div>
+    </div>
 </div>

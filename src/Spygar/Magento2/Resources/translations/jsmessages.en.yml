@@ -5,18 +5,18 @@ pim_menu:
         spygar_magento2: Magento2 Connector
     item:
         documentation: Documentation
+        documentation.tab.docs: How to use.
             # tab:
             #     docs: How to use
         credentials: Credentials
+        configurations: Configurations
         mappping: Attribute Mapping
 
 pim_enrich:
     save.label: Save
-
 pim_title:
     spygar_magento2_documentation: Documentation
     spygar_magento2_credentials: Credentials
-  
 spygar_magento2:
     shopify.fields: Shopify Fields
     akeneo.fields: Akeneo Fields
@@ -24,7 +24,9 @@ spygar_magento2:
     tab:
         credential: Credential
         locales: Locale Mapping
-        attribute_mapping: Attribute Mapping
+        attribute_mapping: Attribute's Mapping
+        stores: Stores
+        media_mapping: Media's Mapping
     form:
         properties.url: Url
         properties.username: Username

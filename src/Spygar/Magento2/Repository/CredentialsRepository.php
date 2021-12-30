@@ -54,14 +54,16 @@ class CredentialsRepository extends EntityRepository implements DatagridReposito
     public function getCredentialWithDetail($id)
     {
         $credential = $this->findOneById($id);
-       
+    //    dump(json_decode($credential->getExtras(), true));die;
         $data = [];
         if ($credential) {
             $data = [
-                'id'            => $credential->getId(),
-                'url'           => $credential->getUrl(),
-                'access_token'  => $credential->getAccessToken(),
-                'stores'        => json_decode($credential->getResources(), true)
+                'id'           => $credential->getId(),
+                'url'          => $credential->getUrl(),
+                'access_token' => $credential->getAccessToken(),
+                'stores'       => json_decode($credential->getResources(), true),
+                'parentAttributes'   => json_decode($credential->getExtras(), true)[0]['parentAttributes'],
+                'variantAttributes'  => json_decode($credential->getExtras(), true)[0]['variantAttributes']
             ];            
         }
 

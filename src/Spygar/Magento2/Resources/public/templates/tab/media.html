@@ -1,0 +1,57 @@
+<!-- Styles for grid view -->
+<style>
+    .AknFormContainer-Mappings .field-input,.AknFormContainer-Mappings .field-header,.AknFormContainer-Mappings .header-col {
+        display: inline-block;
+        vertical-align: top;
+        width: calc(33% - 3px);
+        border: none;
+    }
+    .limit-width-35 {
+        max-width: 35%;
+    }
+    .AknFormContainer-Mappings .AknForm-header.widget-header {
+        border-bottom: 2px solid #67768A;
+        margin-bottom: 10px;
+    }
+    .AknFormContainer-Mappings .AknSettingField,.AknFormContainer-Mappings .AknSettingChildField{
+        width: 80%;
+    }
+
+</style>
+
+<!-- //HTML for form grid view -->
+<div class="AknFormContainer AknFormContainer--withPadding  AknFormContainer-Mappings" 
+    style="width: 100%">
+    <div class="AknSubsection-title">
+        <%- _.__('Image Role Mapping (For simple and Product model)') %>
+    </div> 
+    <div class="AknFieldContainer">
+        <table class="AknGrid AknGrid--unclickable table attribute-option-view ">
+            <thead>
+                <tr> 
+                    <th class="AknGrid-headerCell">  Base </th>
+                    <th class="AknGrid-headerCell"> Small </th>
+                    <th class="AknGrid-headerCell"> Thumbnail </th>                    
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="AknGrid-bodyRow editable-item-row">
+                <% _.each(imageRoles, function(imageRole, imageRoleKey) { %>
+                    <td class="AknGrid-bodyCell">
+                        <select name="<%-imageRole %>" id="pim_enrich_entity_form_<%- imageRole %>" 
+                            class="select2 label-field AknSettingField attributeValue" data-wrapper="mediaMappings">
+                            <% _.each(imageAttrs, function(attribute) { %>
+                                    <option value="<%- attribute.code %>" >
+                                        <%- 'undefined' !== typeof(attribute.labels) 
+                                            && 'undefined' !== typeof(attribute.labels[currentLocale]) 
+                                            ? attribute.labels[currentLocale] : attribute.code  %>
+                                    </option>
+                            <% }); %>
+                        </select>
+                    </td>
+                <% }); %>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
