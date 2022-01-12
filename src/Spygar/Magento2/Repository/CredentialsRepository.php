@@ -18,15 +18,20 @@ class CredentialsRepository extends EntityRepository implements DatagridReposito
     /** @var EntityManagerInterface */
     protected $entityManager;
     
+    protected $channelRepository;
+
     /**
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        $channelRepository
     ) {
-        $classMeta = $entityManager->getClassMetadata(Credentials::class);
+        $this->entityManager     = $entityManager;
+        $this->channelRepository = $channelRepository;
+        $classMeta = $this->entityManager->getClassMetadata(Credentials::class);
        
-        parent::__construct($entityManager, $classMeta);
+        parent::__construct($this->entityManager, $classMeta);
     }
 
     /**
@@ -54,19 +59,46 @@ class CredentialsRepository extends EntityRepository implements DatagridReposito
     public function getCredentialWithDetail($id)
     {
         $credential = $this->findOneById($id);
-    //    dump(json_decode($credential->getExtras(), true));die;
+
         $data = [];
         if ($credential) {
             $data = [
                 'id'           => $credential->getId(),
                 'url'          => $credential->getUrl(),
                 'access_token' => $credential->getAccessToken(),
-                'stores'       => json_decode($credential->getResources(), true),
+                'stores'       => $credential->getResources()['stores'],
+                'storeViewMapping'   => $this->getDefaultStoreViewMapping($credential->getResources()),
                 'parentAttributes'   => json_decode($credential->getExtras(), true)[0]['parentAttributes'],
                 'variantAttributes'  => json_decode($credential->getExtras(), true)[0]['variantAttributes']
             ];            
         }
 
         return $data;
+    }
+
+    /** Get Default storeview mapping */
+    public function getDefaultStoreViewMapping($storeData)
+    {
+        
+        $formattedData   = [];
+        if(isset($storeData['storeViewMapping']) && !empty($storeData['storeViewMapping'])) {
+            $formattedData = $storeData['storeViewMapping'];
+        } else {
+            $defaultChannel  = \current($this->channelRepository->getFullChannels());
+            $defaultLocale   = \current($defaultChannel->getLocaleCodes());
+            $defaultCurrency = $defaultChannel->getCurrencies()->first()->getCode();
+            foreach($storeData['stores'] as $store)
+            {
+                $formattedData[] = [
+                    'store' => $store['code'],
+                    'channel' => $defaultChannel->getCode(),
+                    'locale' => $defaultLocale,
+                    'currency' => $defaultCurrency
+                ];
+            }
+        }
+        
+        return $formattedData;
+
     }
 }

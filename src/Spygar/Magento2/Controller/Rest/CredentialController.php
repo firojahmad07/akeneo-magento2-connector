@@ -48,30 +48,41 @@ class CredentialController extends AbstractController
         }
        
        
-        // $validateCredential = $this->oauthClientHelper->validateCredential($params);
+        $validateCredential = $this->oauthClientHelper->validateCredential($params);
       
-        // if (200 == $validateCredential['status'])
-        // {
-
+        if (200 == $validateCredential['status'])
+        {
+            $formattedStoreView['stores'] = $this->getFormattedStoreViewData($validateCredential['data']);
             $credential->setUrl($params["url"]);
             $credential->setAccessToken($params["access_token"]);
-            // $credential->setResources(json_encode([$params]));
             $credential->setExtras(json_encode([$params]));
-            // $credential->setResources(json_encode($validateCredential['data']));
+            $credential->setResources($formattedStoreView);
             $credential->setActive(true);
             $this->entityManager->persist($credential);
             $this->entityManager->flush();
     
-            $data['meta'] = [
-                // "id" => 1
-                "id" => $credential->getId(),
-            ];
+            $data['meta'] = [ "id" => $credential->getId()];
             
-        // } 
+        } 
        
         return new JsonResponse($data);
     }
 
+    /** get formatted store view */
+    public function getFormattedStoreViewData($storeViewData)
+    {
+        $data = [];
+        $allStoreView = [];
+        foreach($storeViewData as $value) {
+            if($value['code'] == 'admin') {
+                $allStoreView[] = $value;
+            } else {
+                $data[] = $value;
+            }
+        }
+
+        return array_merge($allStoreView, $data);
+    }
     /**
      * Change status of credential
      *     

@@ -88,14 +88,14 @@
                     <div class="field-input">
                         <select name="<%- field.name %>" id="pim_enrich_entity_form_<%- field.name %>" 
                             class="select2 label-field AknSettingField attributeValue" 
-                            data-wrapper="parentAttributes"
-                            <% if(field.name === 'sku') { %> disabled <% } %>>
+                            data-wrapper="parentAttributes">
                             <option><%- _.__('Select Attribute') %></option>
                             <% _.each(attributes, function(attribute) { %>
                                 <% if(!field.types || field.types.indexOf(attribute.type) !== -1 ) { %>
                                     <% selectedOption = !_.isUndefined(formData.parentAttributes) 
-                                                        && !_.isUndefined(formData.parentAttributes[field.name]) 
-                                                        ? formData.parentAttributes[field.name] : '' %>
+                                                            && !_.isEmpty(formData.parentAttributes)
+                                                            && !_.isUndefined(formData.parentAttributes[field.name]) 
+                                                            ? formData.parentAttributes[field.name] : '' %>
                                     <option value="<%- attribute.code %>" 
                                         <% if(selectedOption === attribute.code) { %> selected="selected" <% } %>>
                                         <%- 'undefined' !== typeof(attribute.labels[currentLocale]) ? attribute.labels[currentLocale] : attribute.code  %>
@@ -115,8 +115,9 @@
                             data-wrapper="variantAttributes" 
                             <% if(field.name === 'configurable_product_status') { %> disabled <% } %>>
                             <% variantSelectedOption = !_.isUndefined(formData.variantAttributes) 
-                                                && !_.isUndefined(formData.variantAttributes[field.name]) 
-                                                ? formData.variantAttributes[field.name] : '' %>
+                                                        && !_.isEmpty(formData.variantAttributes)
+                                                        && !_.isUndefined(formData.variantAttributes[field.name]) 
+                                                        ? formData.variantAttributes[field.name] : '' %>
                             <option><%- _.__('Select Attribute') %></option>
                             <% _.each(attributes, function(attribute) { %>
                                 <% if(!field.types || field.types.indexOf(attribute.type) !== -1 ) { %>
@@ -149,7 +150,16 @@
             </div>
 
             <div class="field-input">
-                <input type="text" class="AknTextField label-field view-only" id="dynamic-filed-input">
+                <select name="standard-attributes" id="pim_enrich_entity_form_standard_attributes" 
+                    class="select2 label-field AknSettingChildField standard-attributes" 
+                    data-wrapper="standardAttributes" >                   
+                    <option><%- _.__('Select Attribute') %></option>
+                    <% _.each(magento2StandardAttributes, function(standardAttribute) { %>
+                        <option value="<%- standardAttribute.code %>" >                                        
+                            <%- standardAttribute.code %>
+                        </option>
+                    <% }); %>
+                </select>
             </div>
 
             <span class="AknButton AknButton--grey AknButton--small field-add">

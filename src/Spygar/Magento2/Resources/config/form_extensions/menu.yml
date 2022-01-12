@@ -47,10 +47,10 @@ extensions:
             to: spygar_magento2_credentials
 
     # Common Mapping  
-    pim-menu-spygar-magento2-configurations:
-        module: pim/menu/item
-        parent: pim-menu-spygar-magento2-navigation-block
-        position: 110
-        config:
-            title: pim_menu.item.configurations
-            to: spygar_magento2_configurations
+    # pim-menu-spygar-magento2-configurations:
+    #     module: pim/menu/item
+    #     parent: pim-menu-spygar-magento2-navigation-block
+    #     position: 110
+    #     config:
+    #         title: pim_menu.item.configurations
+    #         to: spygar_magento2_configurations

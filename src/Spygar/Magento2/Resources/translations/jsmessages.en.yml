@@ -6,12 +6,9 @@ pim_menu:
     item:
         documentation: Documentation
         documentation.tab.docs: How to use.
-            # tab:
-            #     docs: How to use
         credentials: Credentials
         configurations: Configurations
         mappping: Attribute Mapping
-
 pim_enrich:
     save.label: Save
 pim_title:
@@ -37,18 +34,22 @@ spygar_magento2:
         id: Id
         active: active
         create: create
+        access_token: Access Token
         url: url
         username: username
         password: password
         client_id: clientId
         client_secret: clientSecret
     attribute:
+        sku: Sku
         name: Name
         price: Price
+        cost: Cost
         description: Description
         short_description: Short Description
         quantity: Quantity
         enabled: Enabled
+        weight: Weight
         meta_keywords: Meta Keywords
         meta_description: Meta Description
         slug: Slug

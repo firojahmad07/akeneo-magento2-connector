@@ -68,11 +68,11 @@ config:
         # fetchers
         pim/fetcher-registry:
             fetchers:
-                sylius-fields:
+                magento2-fields:
                     module: pim/base-fetcher
                     options:
                         urls:
-                            list: spygar_shopify_get_fields
+                            list: spygar_magento2_get_fields
                 shopify-credentials:
                     module: pim/base-fetcher
                     options:

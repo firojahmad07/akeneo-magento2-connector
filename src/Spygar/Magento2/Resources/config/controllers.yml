@@ -1,7 +1,7 @@
 services:
-    spygar.shopify.connector.controller:
+    spygar.magento2.connector.controller:
         public: true
-        class: Spygar\Magento2\Controller\ShopifyController
+        class: Spygar\Magento2\Controller\Magento2Controller
         arguments:
             - "@spygar.magento2.connector.service"
 

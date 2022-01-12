@@ -8,7 +8,7 @@ use Spygar\Magento2\Entity\ApiConnection;
 use Spygar\Magento2\Services\SpygarMagento2Service;
 use Symfony\Component\HttpFoundation\Request;
 
-class ShopifyController extends AbstractController
+class Magento2Controller extends AbstractController
 {
     /** @var SpygarMagento2Service */
     public $spygarSyliusService;
@@ -67,102 +67,63 @@ class ShopifyController extends AbstractController
         return new JsonResponse($this->fieldsData);
       }
 
-      
+         
     private $fieldsData = [
         [
-            'name' => 'title',
-            'label' => 'spygar_shopify.attribute.title',
-            'placeholder' => '',
+            'name' => 'sku',
+            'label' => 'spygar_magento2.attribute.sku',
             'types' => [
-                'pim_catalog_text',
+                'pim_catalog_identifier',
+            ],
+            'tooltip' => 'supported attributes types: Identifier',
+        ],[
+            'name' => 'name',
+            'label' => 'spygar_magento2.attribute.name',
+            'types' => [
+                'pim_catalog_text'
             ],
             'tooltip' => 'supported attributes types: text',
-        ],
-        [
-            'name' => 'body_html',
-            'label' => 'spygar_shopify.attribute.description',
-            'placeholder' => '',
+        ], [
+            'name' => 'description',
+            'label' => 'spygar_magento2.attribute.description',
             'types' => [
                 'pim_catalog_textarea',
             ],
             'tooltip' => 'supported attributes types: textarea',
-        ],        
-        [
+        ], [
+            'name' => 'short_description',
+            'label' => 'spygar_magento2.attribute.short_description',
+            'types' => [
+                'pim_catalog_textarea',
+            ],
+            'tooltip' => 'supported attributes types: textarea',
+        ], [
             'name' => 'price',
-            'label' => 'spygar_shopify.attribute.price',
+            'label' => 'spygar_magento2.attribute.price',
             'placeholder' => '',
             'types' => [
                 'pim_catalog_price_collection',
             ],
             'tooltip' => 'supported attributes types: price',
-        ],
-        [
-            'name' => 'compare_at_price',
-            'label' => 'spygar_shopify.attribute.compare_at_price',
+        ], [
+            'name' => 'cost',
+            'label' => 'spygar_magento2.attribute.cost',
             'placeholder' => '',
             'types' => [
                 'pim_catalog_price_collection',
             ],
             'tooltip' => 'supported attributes types: price',
-        ],
-        [
-            'name' => 'quantity',
-            'label' => 'spygar_shopify.attribute.quantity',
+        ], [
+            'name' => 'quantity_and_stock_status',
+            'label' => 'spygar_magento2.attribute.quantity',
             'placeholder' => '',
             'types' => [
                 'pim_catalog_number',
             ],
             'tooltip' => 'supported attributes types: number',
-        ],
-        [
-            'name' => 'vendor',
-            'label' => 'spygar_shopify.attribute.vendor',
-            'placeholder' => '',
-            'types' => [
-                'pim_catalog_simpleselect',
-             ],
-            'tooltip' => 'supported attributes types: simple select',
-        ],
-        [
-            'name' => 'product_type',
-            'label' => 'spygar_shopify.attribute.product_type',
-            'placeholder' => '',
-            'types' => [
-                'pim_catalog_simpleselect',
-            ],
-            'tooltip' => 'supported attributes types: simple select',
-        ],
-        [
-            'name' => 'fulfillment_service',
-            'label' => 'spygar_shopify.attribute.fulfillment_service',
-            'placeholder' => '',
-            'types' => [
-                'pim_catalog_simpleselect',
-            ],
-            'tooltip' => 'supported attributes types: simple select',
-        ],
-
-        [
-            'name' => 'inventory_management',
-            'label' => 'spygar_shopify.attribute.inventory_management',
-            'placeholder' => '',
-            'types' => [
-                'pim_catalog_simpleselect',
-            ],
-            'tooltip' => 'supported attributes types: simple select',
-        ],
-        [
-            'name' => 'tags',
-            'label' => 'spygar_shopify.attribute.tags',
-            'placeholder' => '',
-            'types' => [
-                'pim_catalog_multiselect',
-            ],
-            'tooltip' => 'supported attributes types: multi select',
-        ],
-        [
+        ], [
             'name' => 'weight',
-            'label' => 'spygar_shopify.attribute.weight',
+            'label' => 'spygar_magento2.attribute.weight',
             'placeholder' => '',
             'types' => [
                 'pim_catalog_metric',

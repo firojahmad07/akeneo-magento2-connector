@@ -10,8 +10,7 @@ define(
         'oro/loading-mask',
         'pim/fetcher-registry',
         'pim/user-context',
-        'pim/initselect2',
-        
+        'pim/initselect2',        
     ],
     function(
         _,
@@ -32,13 +31,11 @@ define(
                 'change .AknFormContainer-Mappings select:not(".view-only")': 'updateModel',
             },
             magento2StandardAttributes:[
-                { code:"sku"}, { code:"name"}, { code:"description"}, { code:"short_description"}, { code:"price"}, 
-                { code:"special_price"}, { code:"special_from_date"}, { code:"special_to_date"}, { code:"cost"}, 
-                { code:"weight"}, { code:"manufacturer"}, { code:"meta_title"}, { code:"meta_keyword"},
+                { code:"manufacturer"}, { code:"meta_title"}, { code:"meta_keyword"},
                 { code:"meta_description"}, { code:"news_from_date"}, { code:"news_to_date"}, { code:"status"},
                 { code:"minimal_price"}, { code:"visibility"}, { code:"options_container"}, { code:"required_options"}, 
                 { code:"has_options"}, { code:"image_label"}, { code:"small_image_label"}, { code:"thumbnail_label"}, 
-                { code:"country_of_manufacture"}, { code:"quantity_and_stock_status"}, { code:"custom_layout"}, 
+                { code:"country_of_manufacture"}, { code:"custom_layout"}, 
                 { code:"price_type"}, { code:"sku_type"}, { code:"weight_type"}, { code:"price_view"}, { code:"shipment_type"}, 
                 { code:"url_key"}, { code:"url_path"}, { code:"msrp"}, { code:"msrp_display_actual_price_type"}, 
                 { code:"links_purchased_separately"}, { code:"samples_title"}, { code:"links_title"}, { code:"links_exist"},
@@ -73,13 +70,14 @@ define(
                     fields = this.fields;
                     attributes = this.attributes;
                 } else {
-                    fields = FetcherRegistry.getFetcher('sylius-fields').fetchAll();
+                    fields = FetcherRegistry.getFetcher('magento2-fields').fetchAll();
                     attributes = FetcherRegistry.getFetcher('attribute').search({options: {'page': 1, 'limit': 1000 } });
                 }
 
                 var self = this;
                 var formData = self.getFormData();
-                Promise.all([fields, attributes, formData]).then(function(values) {
+                var standardAttributes = self.magento2StandardAttributes;
+                Promise.all([fields, attributes, formData, standardAttributes]).then(function(values) {
                     self.fields = values[0];
                     // self.attributes = self.sortByLabel(values[1]);
                     
@@ -87,6 +85,7 @@ define(
                         fields: self.fields,
                         attributes: values[1],
                         formData: values[2],
+                        magento2StandardAttributes: values[3],
                         currentLocale: UserContext.get('uiLocale'),
                     }));
                     

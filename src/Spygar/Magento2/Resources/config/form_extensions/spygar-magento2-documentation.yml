@@ -8,14 +8,14 @@ extensions:
         targetZone: breadcrumbs
         config:
             tab: pim-menu-spygar-magento2
-            item: pim_menu.item.documentation
+            item: pim-menu-spygar-magento2-documentation
 
     spygar-magento2-documentation-title:
         module: pim/common/grid-title
         parent: spygar-magento2-documentation
         targetZone: title
         config:
-            title: pim_menu.item.documentation
+            title: Documentation
             countable: false
 
     spygar-magento2-documentation-user-navigation:

@@ -19,6 +19,10 @@ spygar_magento2_create_credential:
     path: /credential/create
     defaults: { _controller: spygar.magento2.connector.credential.controller:create }
 
+spygar_magento2_update_credential:
+    path: /credential/update
+    defaults: { _controller: spygar.magento2.connector.credential.controller:create }
+
 spygar_magento2_delete_credential:
     path: /credential/delete/{id}
     defaults: { _controller: spygar.magento2.connector.credential.controller:delete }
@@ -36,21 +40,21 @@ spygar_shopify_get_credentials:
     defaults: { _controller: spygar.magento2.connector.credential.controller:getList }
 
 
-spygar_shopify_get_fields:
+spygar_magento2_get_fields:
     path: /rest/fields
-    defaults: { _controller: spygar.shopify.connector.controller:getFields }
+    defaults: { _controller: spygar.magento2.connector.controller:getFields }
     methods: [GET]
 
 spygar_shopify_get_mapping:
     path: /rest/get/mapping
-    defaults: { _controller: spygar.shopify.connector.controller:getMapping }
+    defaults: { _controller: spygar.magento2.connector.controller:getMapping }
 
 # api connection
 spygar_shopify_get_api_connection:
     path: /get/api-connection
-    defaults: { _controller: spygar.shopify.connector.controller:getApiConnection }
+    defaults: { _controller: spygar.magento2.connector.controller:getApiConnection }
 
 spygar_shopify_save_api_connection:
     path: /rest/save/api-connection
-    defaults: { _controller: spygar.shopify.connector.controller:saveApiConnection }
+    defaults: { _controller: spygar.magento2.connector.controller:saveApiConnection }
     methods: ["POST", "PUT"]
