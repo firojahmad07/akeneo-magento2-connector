@@ -29,27 +29,7 @@ class CategoryReader extends BaseCategoryReader
      */
     protected function getResults()
     {
-        $parameters  = $this->stepExecution->getJobParameters();
-        $channelCode = !empty($parameters->has('scope')) ? $parameters->get('scope') : "";
-        $channel        = $channelCode ? $this->channelRepository->findOneByIdentifier($channelCode) : null;
-        $rootCategory   = $channel && $channel->getCategory() ? $channel->getCategory() : null;
-        $rootCategoryId = $rootCategory ? $rootCategory->getId() : null;
-
-        if ($rootCategoryId) {
-            $categories = $this->categoryRepository->findBy(
-                [ 'root' => $rootCategoryId ],
-                [ 'root' => 'ASC', 'left' => 'ASC' ]
-            );
-        } else {
-            $categories = $this->categoryRepository->getOrderedAndSortedByTreeCategories();
-        }
-
-        foreach ($categories as $key => $category) {
-            if ($rootCategoryId == $category->getId()) {
-                unset($categories[$key]);
-                break;
-            }
-        }
+        $categories = $this->categoryRepository->getOrderedAndSortedByTreeCategories();
 
         return new \ArrayIterator($categories);
     }

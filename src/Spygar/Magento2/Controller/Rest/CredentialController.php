@@ -68,6 +68,33 @@ class CredentialController extends AbstractController
         return new JsonResponse($data);
     }
 
+    /** update credential */
+    public function update(Request $request)
+    {
+        $params     = json_decode($request->getContent(), true);
+        $credential = $this->credentialRepository->findOneById($params['id']); 
+        $attributeMappings   = [];
+        $resources['stores'] = $params['stores'];
+        $resources['storeViewMapping'] = $params['storeViewMapping'];
+        // dump($);die;
+        if(!empty($params['parentAttributes'])) {
+            $attributeMappings['parentAttributes'] = $params['parentAttributes'];
+        }
+        if(!empty($params['variantAttributes'])) {
+            $attributeMappings['variantAttributes'] = $params['variantAttributes'];
+        }
+
+        $credential->setResources($resources);
+        if(!empty($attributeMappings)) {
+            // dump($attributeMappings);die;
+            $credential->setExtras(json_encode($attributeMappings));
+        }
+        $this->entityManager->persist($credential);
+        $this->entityManager->flush();
+        
+        return new JsonResponse(['id' => $credential->getId()]);
+    }
+
     /** get formatted store view */
     public function getFormattedStoreViewData($storeViewData)
     {

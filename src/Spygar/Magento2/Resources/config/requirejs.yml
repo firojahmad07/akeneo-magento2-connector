@@ -38,8 +38,8 @@ config:
         spygarmagento2/templates/tab/media: spygarmagento2/templates/tab/media.html
         # spygarmagento2/templates/tab/api-connection: spygarmagento2/templates/tab/api-connection.html
         ## common templates
-        spygarmagento2/templates/tab/locales: spygarmagento2/templates/common/locales.html
-        spygarmagento2/templates/tab/scope: spygarmagento2/templates/common/scope.html
+        spygarmagento2/templates/common/locales: spygarmagento2/templates/common/locales.html
+        spygarmagento2/templates/common/scope: spygarmagento2/templates/common/scope.html
 
     config:
         # controllers     
@@ -73,8 +73,8 @@ config:
                     options:
                         urls:
                             list: spygar_magento2_get_fields
-                shopify-credentials:
+                magento2-credentials:
                     module: pim/base-fetcher
                     options:
                         urls:
-                            list: spygar_shopify_get_credentials
+                            list: spygar_magento2_get_credentials

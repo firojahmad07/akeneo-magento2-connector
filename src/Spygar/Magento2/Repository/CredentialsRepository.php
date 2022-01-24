@@ -68,8 +68,8 @@ class CredentialsRepository extends EntityRepository implements DatagridReposito
                 'access_token' => $credential->getAccessToken(),
                 'stores'       => $credential->getResources()['stores'],
                 'storeViewMapping'   => $this->getDefaultStoreViewMapping($credential->getResources()),
-                'parentAttributes'   => json_decode($credential->getExtras(), true)[0]['parentAttributes'],
-                'variantAttributes'  => json_decode($credential->getExtras(), true)[0]['variantAttributes']
+                'parentAttributes'   => json_decode($credential->getExtras(), true)['parentAttributes'],
+                'variantAttributes'  => json_decode($credential->getExtras(), true)['variantAttributes']
             ];            
         }
 

@@ -35,7 +35,7 @@ class DataMapping
     /**
      * @var string
      */
-    private $shopUrl;
+    private $url;
 
     /**
      * @var \DateTime|null
@@ -150,27 +150,27 @@ class DataMapping
     }
 
     /**
-     * Set shopUrl.
+     * Set url.
      *
-     * @param string $shopUrl
+     * @param string $url
      *
      * @return DataMapping
      */
-    public function setShopUrl($shopUrl)
+    public function setUrl($url)
     {
-        $this->shopUrl = $shopUrl;
+        $this->url = $url;
 
         return $this;
     }
 
     /**
-     * Get shopUrl.
+     * Get url.
      *
      * @return string
      */
-    public function getShopUrl()
+    public function getUrl()
     {
-        return $this->shopUrl;
+        return $this->url;
     }
 
     /**

@@ -70,13 +70,13 @@ class BaseJobParameter implements
 
         $credentials        = $this->credentialsRepository->findAll();
         $defaultCredential  = !empty($credentials) ? current($credentials)->getId() : null;
-
+       
         $parameters = [
-            "scope"      => $defaultChannelCode,
-            "locale"     => $defaultLocaleCode,
-            "credential" => $defaultCredential,
+            "scopes"      => [$defaultChannelCode],
+            "locales"     => [$defaultLocaleCode],
+            "credential"  => $defaultCredential,
         ];
-
+        
         return $parameters;
     }
 
@@ -94,7 +94,7 @@ class BaseJobParameter implements
         // $constraintFields['dateFormat'] = new NotBlank();
         // $constraintFields['credential'] = new NotBlank();
        
-
+        
         return new Collection([
                             'fields' => $constraintFields,
                             'allowExtraFields' => true,

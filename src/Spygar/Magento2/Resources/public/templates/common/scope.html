@@ -4,9 +4,11 @@
     </label>
 </div>
 <div class="AknFieldContainer-inputContainer">
-    <select class="select2" <%- isEditable ? '' : 'disabled' %> id="pim_enrich.export.product.filter.channel">
+    <select class="select2" id="pim_enrich.export.product.filter.channel" multiple>
         <% _.each(channels, function (channel) { %>
-            <option value="<%- channel.code %>" <%- channel.code === scope ? 'selected' : '' %>><%- channel.label %></option>
+            <option value="<%- channel.code %>" 
+                <% if(_.contains(scopes, channel.code)) { %> selected="selected" <% } %>>
+                <%- channel.label %></option>
         <% }); %>
     </select>
     <div class="AknFieldContainer-iconsContainer icons-container">

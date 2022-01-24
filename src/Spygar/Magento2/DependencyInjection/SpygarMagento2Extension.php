@@ -24,13 +24,13 @@ class SpygarMagento2Extension extends Extension
         $loader->load('services.yml');
         $loader->load('repository.yml');
         $loader->load('controllers.yml');
-        // $loader->load('jobs.yml');
-        // $loader->load('steps.yml');
-        // $loader->load('readers.yml');
+        $loader->load('jobs.yml');
+        $loader->load('steps.yml');
+        $loader->load('readers.yml');
         // $loader->load('processors.yml');
-        // $loader->load('writers.yml');
-        // $loader->load('form_providers.yml');
-        // $loader->load('job_parameters.yml');
+        $loader->load('writers.yml');
+        $loader->load('form_providers.yml');
+        $loader->load('job_parameters.yml');
 
     }
 }

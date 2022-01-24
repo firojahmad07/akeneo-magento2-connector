@@ -11,7 +11,7 @@ define(
         'pim/fetcher-registry',
         'pim/user-context',
         'pim/initselect2',
-        
+        'oro/messenger',
     ],
     
     function(
@@ -23,7 +23,8 @@ define(
         LoadingMask,
         FetcherRegistry,
         UserContext,
-        initSelect2
+        initSelect2,
+        messenger
     ) {
         return BaseForm.extend({
             isGroup: true,
@@ -148,23 +149,30 @@ define(
                 if(-1 != activeStoreViewIndex) {
                     formData.storeViewMapping[activeStoreViewIndex] = params
                 }
-                
-                
-                console.log("here params .",formData.storeViewMapping);
-                // this.showLoadingMask();
 
-                // var data = this.stringify();
-                // console.log("data : ", data, this.url);
-                // $.ajax({
-                //     method: 'POST',
-                //     url: Routing.generate('spygar_magento2_update_credential'),
-                //     contentType: 'application/json',
-                //     data: data
-                // })
-                // .then(this.postSave.bind(this))
-                // .fail(this.fail.bind(this))
-                // .always(this.hideLoadingMask.bind(this));
-            }
+                $.ajax({
+                    method: 'POST',
+                    url: Routing.generate('spygar_magento2_update_credential'),
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData)
+                })
+                .then(this.success())
+                .fail(this.fail());
+            },
+            /**
+             * {@inheritdoc}
+             */
+            success: function () {
+                messenger.notify('success', __('spygar_magento2.notification.store.success')); 
+                this.render();
+            },
+            /**
+             * {@inheritdoc}
+             */
+            fail: function () {
+                messenger.notify( 'error', __('spygar_magento2.notification.store.success')); 
+                this.render();
+            } 
         });
     }
 );

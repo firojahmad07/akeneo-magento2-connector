@@ -5,10 +5,11 @@
 </div>
 <div class="AknFieldContainer-inputContainer">
     <select class="select2"
-        id="pim_enrich.export.product.filter.locales">
+        id="pim_enrich.export.product.filter.locales" multiple>
         <% _.each(availableLocales, function (locale) { %>
-            <option value="<%- locale.code %>" 
-                    <%- _.contains([locales], locale.code) ? 'selected' : '' %>><%- locale.label %></option>
+            <option value="<%- locale.code %>"
+                <% if(_.contains(locales, locale.code)) { %> selected="selected" <% } %> >
+                <%- locale.label %></option>
         <% }); %>
     </select>
     <div class="AknFieldContainer-iconsContainer icons-container">

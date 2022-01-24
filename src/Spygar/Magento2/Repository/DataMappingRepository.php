@@ -2,6 +2,9 @@
 
 namespace Spygar\Magento2\Repository;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Spygar\Magento2\Entity\DataMapping;
+
 /**
  * DataMappingRepository
  *
@@ -10,8 +13,30 @@ namespace Spygar\Magento2\Repository;
  */
 class DataMappingRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function __construct()
+     /** @var EntityManagerInterface */
+     protected $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
     {
+        $this->entityManager = $entityManager;
+        $classMeta = $this->entityManager->getClassMetadata(DataMapping::class);
+        parent::__construct($this->entityManager, $classMeta);
+    }
+
+    /** create or update mapping */
+    public function createOrUpdateMapping($params, $mapping)
+    {
+        $dateTime = new \DateTime();
+        $dataMapping = !empty($mapping) ? $mapping : new DataMapping;
         
+        $dataMapping->setCode($params['code']);
+        $dataMapping->setEntityType($params['entityType']);
+        $dataMapping->setExternalId($params['externalId']);
+        $dataMapping->setRelatedId($params['relatedId']);
+        $dataMapping->setUrl($params['url']);
+        $dataMapping->setCreated($dateTime);
+
+        $this->entityManager->persist($dataMapping);
+        $this->entityManager->flush();
     }
 }

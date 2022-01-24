@@ -2,15 +2,14 @@
 /**
  * Scope structure filter
  *
- * @author    Julien Sanchez <julien@akeneo.com>
- * @copyright 2016 Akeneo SAS (http://www.akeneo.com)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author Firoj Ahmad
  */
+
 define([
   'jquery',
   'underscore',
   'oro/translator',
-  'spygarmagento2/templates/tab/scope',
+  'spygarmagento2/templates/common/scope',
   'pim/form',
   'pim/fetcher-registry',
   'pim/user-context',
@@ -57,7 +56,7 @@ define([
                 isEditable: this.isEditable(),
                 __: __,
                 channels: this.setChannelLabels(channels),
-                scope: this.getScope(),
+                scopes: this.getScope(),
                 errors: this.getParent().getValidationErrorsForField('scope'),
               })
             );
@@ -105,7 +104,10 @@ define([
      * @param {Object} event
      */
     updateState: function (event) {
-      this.setScope(event.target.value);
+      var scopes = _.map($(event.target).select2('data'), function(value){
+         return value.id;
+      });
+      this.setScope(scopes);
     },
 
     /**
@@ -113,14 +115,14 @@ define([
      *
      * @param {String} code
      */
-    setScope: function (code) {
+    setScope: function (codes) {
       var data = this.getFilters();
-      var before = data.configuration.scope;
-      data.configuration.scope = code;
+      var before = data.configuration.scopes;
+      data.configuration.scopes = codes;
       this.setData(data);
 
-      if (before !== code) {
-        this.getRoot().trigger('channel:update:after', data.configuration.scope);
+      if (before !== codes) {
+        this.getRoot().trigger('channel:update:after', data.configuration.scopes);
       }
     },
 
@@ -135,7 +137,7 @@ define([
         return null;
       }
 
-      return _.isUndefined(data.configuration.scope) ? null : data.configuration.scope;
+      return _.isUndefined(data.configuration.scopes) ? null : data.configuration.scopes;
     },
 
     /**

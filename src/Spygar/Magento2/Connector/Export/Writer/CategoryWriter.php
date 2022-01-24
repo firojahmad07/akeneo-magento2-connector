@@ -2,83 +2,83 @@
 
 namespace Spygar\Magento2\Connector\Export\Writer;
 
-// use Spygar\Shopify\Entity\DataMapping;
-// use Spygar\Shopify\Traits\DataMappingTrait;
+use Spygar\Magento2\Traits\DataMappingTrait;
 use Akeneo\Tool\Component\Batch\Item\ItemWriterInterface;
-// $obj = new \Spygar\ShopifyBundle\Listener\LoadingClassListener();
-// $obj->checkVersionAndCreateClassAliases();
 
 /**
  * Add categories to Magento2
  *
  * @author    Spygar
- * @copyright 2010-2017 Spygar pvt. ltd.
- * @license   https://store.Spygar.com/license.html
  */
 
 class CategoryWriter extends BaseWriter implements ItemWriterInterface
 {
-    // use DataMappingTrait;
+    use DataMappingTrait;
 
-    // const AKENEO_ENTITY_NAME = 'category';
-    // const SMART_COLLECTION_ENTITY = 'smart_collection';
-    // const ACTION_ADD = 'addCategory';
-    // const ACTION_UPDATE = 'updateCategory';
+    const AKENEO_ENTITY_NAME   = 'category';
+    const ACTION_ADD_OR_UPDATE = 'addOrUpdate';
+    const RESOURCE_WRAPPER     = 'category';
 
-    // const CODE_ALREADY_EXIST = 'na';
-    // const CODE_DUPLICATE_EXIST = 'na';
-    // const CODE_UNPROCESSABLE = 422;
-
-    // const CODE_NOT_EXIST = 404;
-    // const RELATED_INDEX = '';
-
-    // const RESOURCE_WRAPPER = 'custom_collection';
-
+    protected $magento2Url;
     /**
-     * write products to ShopifyApi
+     * Write Categories to Magento2   
      */
+    
     public function write(array $items)
     {
+        $jobCredential      = $this->connectorService->getJobCredentialData();
+        $this->magento2Url  = $jobCredential['url'];
         foreach ($items as $item) {
-            if (empty($item['parent'])) {
-                continue;
-            }
-
-            $mapping = $this->checkMappingInDb($item);
-            if ($mapping) {
+            foreach($jobCredential['storeViewMapping'] as  $storeViewMapping) 
+            {   
+                $mapping = $this->checkMappingInDb($item, $this->magento2Url);
+                $formattedData = $this->formatData($item, $mapping, $storeViewMapping['locale']);
+                
                 $result = $this->connectorService->requestApiAction(
-                    self::ACTION_UPDATE,
-                    $this->formatData($item),
-                    ['id' => $mapping->getExternalId() ]
+                    $jobCredential,
+                    self::ACTION_ADD_OR_UPDATE,
+                    $formattedData,
+                    $storeViewMapping['store']
                 );
-                $this->handleAfterApiRequest($item, $result, $mapping);
-            } else {
-                $mapping = $this->checkMappingInDb($item, $this::SMART_COLLECTION_ENTITY);
-                if ($mapping) {
-                    $this->stepExecution->addWarning("Skipped Smart Collection", ['category' => $item['code']], new \DataInvalidItem(['code' => $item['code']]));
-                    continue;
+                
+                if($result['status'] == 200) {
+                    $resultData =['externalId' => $result['data']['id'], 'relatedId'  => $result['data']['parent_id'] ];
+                    $this->handleApiRequest($item, $resultData, $mapping, $this->magento2Url);
                 }
 
-                $result = $this->connectorService->requestApiAction(
-                    self::ACTION_ADD,
-                    $this->formatData($item)
-                );
-
-                $this->handleAfterApiRequest($item, $result);
+                // $this->stepExecution->addWarning('Warning : ', [], 
+                //     new DataInvalidItem([$storeViewMapping['store']. 
+                //     '']));
             }
 
             /* increment write count */
             $this->stepExecution->incrementSummaryInfo('write');
         }
     }
+    /** format category data */
+    protected function formatData($item, $mapping, $locale)
+    {
+        $labels = !empty($item['labels']) ? $item['labels'] : [];
+        $formatted = [
+            'id' => !empty($mapping) ? $mapping->getExternalId() : 0,
+            'parent_id' => $this->getCategoryParentId($item, $mapping),
+            'is_active' => true,
+            'include_in_menu' => true,
+            'name' => !empty($labels[$locale]) ?  $labels[$locale] : $item['code'],
+         
+        ];
 
-//     protected function formatData($item)
-//     {
-//         $labels = !empty($item['labels']) ? $item['labels'] : [];
-//         $formatted = [
-//             'title' => !empty($labels[$this->getDefaultLanguage()]) ?  $labels[$this->getDefaultLanguage()] : ($item['code']),
-//             // 'handle' => $item['code'],
-//         ];
-//         return [ self::RESOURCE_WRAPPER => $formatted ];
-//     }
+        return [ self::RESOURCE_WRAPPER => $formatted ];
+    }
+
+    public function getCategoryParentId($item, $mapping)
+    {
+        $parentId = 1;
+        if(!empty($item['parent'])) {
+            $parentMapping  = $this->checkMappingInDb(['code' => $item['parent']], $this->magento2Url);
+            $parentId = !empty($parentMapping) ? $parentMapping->getExternalId() : $parentId;
+        }
+
+        return $parentId;
+    }
 }

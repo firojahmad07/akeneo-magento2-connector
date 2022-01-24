@@ -1,5 +1,10 @@
 services:
-  spygar_shopify.writer.category:
-    class: Spygar\Shopify\Connector\Export\Writer\CategoryWriter
+  spygar_magento2.category.writer:
+    class: Spygar\Magento2\Connector\Export\Writer\CategoryWriter
     arguments:
-        - "@spygar.shopify.connector.service"
+        - "@spygar.magento2.connector.service"
+
+  spygar_magento2.family.writer:
+    class: Spygar\Magento2\Connector\Export\Writer\FamilyWriter
+    arguments:
+      - "@spygar.magento2.connector.service"

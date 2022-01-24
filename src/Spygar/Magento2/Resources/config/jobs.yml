@@ -1,17 +1,30 @@
 parameters:
-    spygar.shopify.connector: "Spygar Shopify Connnector"
-    spygar.shopify.category.export: "spygar_shopify_category_export"
+    spygar_magento2.connector: "Magento2 Connnector"
+    spygar_magento2.category.export: "spygar_magento2_category_export"
+    spygar_magento2.family.export: "spygar_magento2_family_export"
     
 services:
-    spygar.shopify.category:
+    spygar_magento2.category.export:
         public: true
         class: '%pim_connector.job.simple_job.class%'
         arguments:
-            - "%spygar.shopify.category.export%"
+            - "%spygar_magento2.category.export%"
             - "@event_dispatcher"
             - "@akeneo_batch.job_repository"
             -
-                - "@spygar.shopify.category_export"
+                - "@spygar_magento2.category_export.step"
         tags:
-            - { name: akeneo_batch.job, connector: "%spygar.shopify.connector%", type: "%pim_connector.job.export_type%" }
+            - { name: akeneo_batch.job, connector: "%spygar_magento2.connector%", type: "%pim_connector.job.export_type%" }
+        
+    spygar_magento2.family.export:
+        public: true
+        class: '%pim_connector.job.simple_job.class%'
+        arguments:
+            - "%spygar_magento2.family.export%"
+            - "@event_dispatcher"
+            - "@akeneo_batch.job_repository"
+            -
+                - "@spygar_magento2.family_export.step"
+        tags:
+            - { name: akeneo_batch.job, connector: "%spygar_magento2.connector%", type: "%pim_connector.job.export_type%" }
         

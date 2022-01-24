@@ -21,7 +21,7 @@ spygar_magento2_create_credential:
 
 spygar_magento2_update_credential:
     path: /credential/update
-    defaults: { _controller: spygar.magento2.connector.credential.controller:create }
+    defaults: { _controller: spygar.magento2.connector.credential.controller:update }
 
 spygar_magento2_delete_credential:
     path: /credential/delete/{id}
@@ -35,7 +35,7 @@ spygar_magento2_get_credential:
     path: /credential/details/{id}
     defaults: { _controller: spygar.magento2.connector.credential.controller:details }
 
-spygar_shopify_get_credentials:
+spygar_magento2_get_credentials:
     path: /credential/list
     defaults: { _controller: spygar.magento2.connector.credential.controller:getList }
 

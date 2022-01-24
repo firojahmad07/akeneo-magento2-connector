@@ -4,6 +4,8 @@ namespace Spygar\Magento2\Services;
 use Doctrine\ORM\EntityManager;
 use Spygar\Magento2\Entity\ApiConnection;
 use Spygar\Magento2\Repository\CredentialsRepository;
+use Spygar\Magento2\Repository\DataMappingRepository;
+use Spygar\Magento2\Components\OAuthClient;
 
 class SpygarMagento2Service 
 {
@@ -12,6 +14,9 @@ class SpygarMagento2Service
 
     /** @var CredentialsRepository */
     public $credentialRepository;
+
+    /** @var DataMappingRepository */
+    public $dataMappingRepository;
 
     /** @var */
     public $stepExecution;
@@ -22,10 +27,13 @@ class SpygarMagento2Service
      */
     public function __construct(
         EntityManager $entityManager,
-        CredentialsRepository $credentialRepository)
+        CredentialsRepository $credentialRepository,
+        DataMappingRepository $dataMappingRepository
+        )
     {
-        $this->entityManager        = $entityManager;
-        $this->credentialRepository = $credentialRepository;
+        $this->entityManager         = $entityManager;
+        $this->credentialRepository  = $credentialRepository;
+        $this->dataMappingRepository = $dataMappingRepository;
     }
     /** Set step execution instance */
     public function setStepExecution($stepExecution)
@@ -45,20 +53,11 @@ class SpygarMagento2Service
      * Get Api Connection Details
      * @return Array
      */
-    public function getApiConnection($id = null)
+    public function requestApiAction($credential, $endPoint, $payload, $storeViewCode)
     {
-        // $apiConnectionRepo = $this->entityManager->getRepository(ApiConnection::class);
-        // $apiConnectionQB = $apiConnectionRepo->createQueryBuilder('ap')
-        //                     ->select('ap.id, ap.clientId, ap.secret, ap.username, ap.password');
+        $client = new OAuthClient($credential);
         
-        // if($id) {
-        //     $apiConnectionQB->andWhere('ap.id =:id');
-        //     $apiConnectionQB->setParameter('id', $id);
-        // }
-
-        return null;
-
-        // return  !empty($apiConnectionQB->getQuery()->getResult()) ?  $apiConnectionQB->getQuery()->getSingleResult() : [];
+        return $client->request($endPoint, $payload, $storeViewCode);
     }
 
     /**
@@ -74,10 +73,40 @@ class SpygarMagento2Service
      * Get Credential By Id
      * @return array
      */
-    public function getCredential($id)
+    public function getCredentialById($id)
     {
         $credential = $this->credentialRepository->getCredentialWithDetail($id);
-        dump($credential);die;
+        $data       = [];
+        if(!empty($credential)) {
+            $data = [
+                'id'  => $credential['id'],
+                'url' => $credential['url'],
+                'access_token'     => $credential['access_token'],
+                'storeViewMapping' => $credential['storeViewMapping']
+            ];
+        }
+
+        return $data;
     }
 
+    /** Get active credentail data which is assign into job */
+    public function getJobCredentialData()
+    {
+        $jobParameters = $this->stepExecution->getJobParameters();
+        $credentialId  = $jobParameters->has('credential') ? $jobParameters->get('credential') : null;
+
+        return $this->getCredentialById($credentialId);
+    }
+
+    /** Get Mapping  */
+    public function getMappingData($params)
+    {
+        return $this->dataMappingRepository->findOneBy($params);
+    }
+
+    /** Create new or Update existing mapping */
+    public function createOrUpdateMapping($params, $mapping)
+    {
+        $this->dataMappingRepository->createOrUpdateMapping($params, $mapping);
+    }
 }

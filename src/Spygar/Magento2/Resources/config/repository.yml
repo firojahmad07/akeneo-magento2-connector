@@ -5,3 +5,9 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - '@pim_catalog.repository.channel'
+    
+    spygar.magento2.data_mapping.repository:
+        public: true
+        class: Spygar\Magento2\Repository\DataMappingRepository
+        arguments:
+            - "@doctrine.orm.entity_manager"

@@ -5,6 +5,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@spygar.magento2.credential.repository"
+            - "@spygar.magento2.data_mapping.repository"
 
     spygar.magento2.oauth_client.helper:
         public: true

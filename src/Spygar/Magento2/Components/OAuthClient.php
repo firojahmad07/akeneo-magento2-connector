@@ -29,66 +29,38 @@ class OAuthClient
       
     }
 
-    public function request($requestUrl, $payload, $method, $header = [])
+    public function request($requestUrl, $payload, $storeViewCode)
     {
-        $this->_method = $method;
         $this->_curl  = \curl_init();
-
-        return $this->createCurl($requestUrl, $payload, $method, $header);
+        return $this->createCurl($requestUrl, $payload, $storeViewCode);
     }
 
     /** get Generated Url */
 
-    public function generateApiUrl($url, $data)
+    public function generateApiUrl($url, $storeViewCode, $requestParams = [])
     {
 
-        $fullUrl = isset($this->endPoints[$url]) ? $this->endPoints[$url] : "";
-        $fullUrl = \str_ireplace("{{url}}", $this->activeCredential['url'], $fullUrl);
-
-        switch($url)
-        {
-            case 'get_access_token':
-                $params = [
-                    "client_id=". $this->activeCredential['client_id'],
-                    "client_secret=" . $this->activeCredential['client_secret'],
-                    "grant_type=" . "password",
-                    "username=" . $this->activeCredential['username'],
-                    "password=" . $this->activeCredential['password'],
-                ];
-                $fullUrl = $fullUrl . \implode("&", $params);
-            break;
-            case 'get_active_locals':
-                $params = [
-                    "page=1",
-                    "limit=25"
-                ];
-                $fullUrl = $fullUrl . \implode("&", $params);
-            break;
-            default:
-            
-            break;
-        }
-
-        
-
-        return $fullUrl;
-
+        $endPointData  = isset($this->endPoints[$url]) ? $this->endPoints[$url] : "";
+        $this->_method = $endPointData['method'];
+        $fullUrl = ($storeViewCode == 'admin') ? \str_ireplace("{_store}/", "", $endPointData['url']) : \str_ireplace("{_store}", $storeViewCode, $endPointData['url']);
+      
+        return trim($this->_url, "/").$fullUrl;
     }
     
  
-    public function createCurl($requestUrl, $payload = [], $method = "GET", $header = [])
+    public function createCurl($requestUrl, $payload = [], $storeViewCode)
     {
-        $this->_url = $this->generateApiUrl($requestUrl, []);  
-      
+        $this->_url = $this->generateApiUrl($requestUrl, $storeViewCode);  
+       
         \curl_setopt($this->_curl, CURLOPT_URL, $this->_url);        
         \curl_setopt($this->_curl, CURLOPT_RETURNTRANSFER, true);
         \curl_setopt($this->_curl, CURLOPT_HTTPHEADER, $this->getRequestHeaders());
      
 
-        if(in_array($method, ['POST']))
+        if(in_array($this->_method, ['POST']))
         {
             \curl_setopt($this->_curl, CURLOPT_POST, true);
-            \curl_setopt($this->_curl, CURLOPT_POSTFIELDS, $payload);
+            \curl_setopt($this->_curl, CURLOPT_POSTFIELDS, json_encode($payload));
         }
        
         $response   = \curl_exec($this->_curl);

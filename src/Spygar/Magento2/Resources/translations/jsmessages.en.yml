@@ -9,8 +9,16 @@ pim_menu:
         credentials: Credentials
         configurations: Configurations
         mappping: Attribute Mapping
+pim_common:
+    settings: Settings
+batch_jobs:
+    spygar_magento2_category_export.label: Category Export
+    spygar_magento2_family_export.label: Family Export
+    default_steps:
+        category_export: Category Export
 pim_enrich:
     save.label: Save
+    credential.uppercase_label: Credentials
 pim_title:
     spygar_magento2_documentation: Documentation
     spygar_magento2_credentials: Credentials

@@ -1,32 +1,32 @@
 extensions:
-    pim-job-instance-spygar-akeneo-magento2-category-export-show:
+    pim-job-instance-spygar-akeneo-magento2-family-export-show:
         module: pim/form/common/edit-form
 
-    pim-job-instance-spygar-akeneo-magento2-category-export-show-main-image:
+    pim-job-instance-spygar-akeneo-magento2-family-export-show-main-image:
         module: pim/form/common/main-image
-        parent: pim-job-instance-spygar-akeneo-magento2-category-export-show
+        parent: pim-job-instance-spygar-akeneo-magento2-family-export-show
         targetZone: main-image
         config:
             path: bundles/spygarmagento2/images/akeneo-magento2.png
 
-    pim-job-instance-spygar-akeneo-magento2-category-export-show-user-navigation:
+    pim-job-instance-spygar-akeneo-magento2-family-export-show-user-navigation:
         module: pim/menu/user-navigation
-        parent: pim-job-instance-spygar-akeneo-magento2-category-export-show
+        parent: pim-job-instance-spygar-akeneo-magento2-family-export-show
         targetZone: user-menu
         config:
             userAccount: pim_menu.user.user_account
             logout: pim_menu.user.logout
 
-    pim-job-instance-spygar-akeneo-magento2-category-export-show-breadcrumbs:
+    pim-job-instance-spygar-akeneo-magento2-family-export-show-breadcrumbs:
         module: pim/common/breadcrumbs
-        parent: pim-job-instance-spygar-akeneo-magento2-category-export-show
+        parent: pim-job-instance-spygar-akeneo-magento2-family-export-show
         targetZone: breadcrumbs
         config:
             tab: pim-menu-exports
 
-    pim-job-instance-spygar-akeneo-magento2-category-export-show-launch:
+    pim-job-instance-spygar-akeneo-magento2-family-export-show-launch:
         module: pim/job/common/edit/launch
-        parent: pim-job-instance-spygar-akeneo-magento2-category-export-show
+        parent: pim-job-instance-spygar-akeneo-magento2-family-export-show
         targetZone: meta
         position: 110
         config:
@@ -36,15 +36,15 @@ extensions:
                 path: code
                 name: code
 
-    pim-job-instance-spygar-akeneo-magento2-category-export-show-label:
+    pim-job-instance-spygar-akeneo-magento2-family-export-show-label:
         module: pim/job/common/edit/label
-        parent: pim-job-instance-spygar-akeneo-magento2-category-export-show
+        parent: pim-job-instance-spygar-akeneo-magento2-family-export-show
         targetZone: title
         position: 100
 
-    pim-job-instance-spygar-akeneo-magento2-category-export-show-edit:
+    pim-job-instance-spygar-akeneo-magento2-family-export-show-edit:
         module: pim/common/redirect
-        parent: pim-job-instance-spygar-akeneo-magento2-category-export-show
+        parent: pim-job-instance-spygar-akeneo-magento2-family-export-show
         targetZone: buttons
         position: 100
         aclResourceId: pim_importexport_export_profile_edit
@@ -56,16 +56,16 @@ extensions:
                 path: code
                 name: code
 
-    pim-job-instance-spygar-akeneo-magento2-category-export-show-subsection:
+    pim-job-instance-spygar-akeneo-magento2-family-export-show-subsection:
         module: pim/form/common/subsection
-        parent: pim-job-instance-spygar-akeneo-magento2-category-export-show
+        parent: pim-job-instance-spygar-akeneo-magento2-family-export-show
         targetZone: content
         config:
             title: pim_import_export.form.job_instance.subsection.last_executions
 
-    pim-job-instance-spygar-akeneo-magento2-category-export-show-grid:
+    pim-job-instance-spygar-akeneo-magento2-family-export-show-grid:
         module: pim/job/common/grid
-        parent: pim-job-instance-spygar-akeneo-magento2-category-export-show-subsection
+        parent: pim-job-instance-spygar-akeneo-magento2-family-export-show-subsection
         position: 1000
         targetZone: content
         config:

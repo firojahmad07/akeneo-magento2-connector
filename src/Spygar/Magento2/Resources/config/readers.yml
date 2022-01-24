@@ -1,7 +1,6 @@
 services:
-    shopify.reader.database.category:
-        class: Spygar\Shopify\Connector\Export\Reader\CategoryReader
+    spygar_magento2.reader.database.category:
+        class: Spygar\Magento2\Connector\Export\Reader\CategoryReader
         arguments:
             - '@pim_catalog.repository.category'
-            - '@pim_catalog.repository.channel'
-            
+            - '@pim_catalog.repository.channel'            

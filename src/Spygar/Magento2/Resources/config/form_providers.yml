@@ -1,11 +1,12 @@
 parameters:
 
 services:
-    spygar.akeneo_shopify.form.provider.job_instance:
+    spygar.akeneo_magento2.form.provider.job_instance:
         public: true
         class: 'Akeneo\Platform\Bundle\ImportExportBundle\Provider\Form\JobInstanceFormProvider'
         arguments:
             -
-                spygar_shopify_category_export: pim-job-instance-spygar-akeneo-shopify-category-export
+                spygar_magento2_category_export: pim-job-instance-spygar-akeneo-magento2-category-export
+                spygar_magento2_family_export: pim-job-instance-spygar-akeneo-magento2-family-export
         tags:
             - { name: pim_enrich.provider.form }

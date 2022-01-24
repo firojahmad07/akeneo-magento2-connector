@@ -1,6 +1,6 @@
 <?php
 
-namespace Spygar\Shopify\Steps;
+namespace Spygar\Magento2\Steps;
 
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Akeneo\Tool\Component\Batch\Item\ItemProcessorInterface;
@@ -101,7 +101,8 @@ class BaseStep extends AbstractStep
         $itemsToWrite = [];
         $writeCount = 0;
         $this->initializeStepElements($stepExecution);
-
+        // dump(get_class($this->reader));die;
+        // dump(get_class_methods($this->reader));die;
         while (true) {
             try {
                 $readItem = $this->reader->read();

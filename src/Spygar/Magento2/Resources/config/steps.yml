@@ -1,15 +1,24 @@
-parameters:
-    spygar.shopify.base.step: Spygar\Shopify\Steps\BaseStep
-    
 services:
-    spygar.shopify.category_export:
-        class: '%spygar.shopify.base.step%'
+    spygar_magento2.category_export.step:
+        class: Spygar\Magento2\Steps\BaseStep
         public: true
         arguments:
             - 'category_export'
             - '@event_dispatcher'
             - '@akeneo_batch.job_repository'
-            - '@shopify.reader.database.category'
+            - '@spygar_magento2.reader.database.category'
             - '@pim_connector.processor.normalization.category'
-            - '@spygar_shopify.writer.category'
+            - '@spygar_magento2.category.writer'
+            - 10
+
+    spygar_magento2.family_export.step:
+        class: Spygar\Magento2\Steps\BaseStep
+        public: true
+        arguments:
+            - 'category_export'
+            - '@event_dispatcher'
+            - '@akeneo_batch.job_repository'
+            - '@pim_connector.reader.database.family'
+            - '@pim_connector.processor.normalization.family'
+            - '@spygar_magento2.family.writer'
             - 10

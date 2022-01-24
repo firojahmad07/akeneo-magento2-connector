@@ -2,15 +2,13 @@
 /**
  * Locale structure filter
  *
- * @author    Julien Sanchez <julien@akeneo.com>
- * @copyright 2016 Akeneo SAS (http://www.akeneo.com)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @author Firoj Ahmad
  */
 define([
   'jquery',
   'underscore',
   'oro/translator',
-  'spygarmagento2/templates/tab/locales',
+  'spygarmagento2/templates/common/locales',
   'pim/form',
   'pim/fetcher-registry',
   'jquery.select2',
@@ -102,7 +100,7 @@ define([
     setLocales: function (codes) {
       var data = this.getFilters();
       var before = data.configuration.locale;
-
+      console.log("codes : ", codes);
       data.configuration.locale = codes;
       this.setData(data);
 
@@ -159,7 +157,7 @@ define([
      * @return {String}
      */
     getCurrentScope: function () {
-      return this.getFilters().configuration.scope;
+      return this.getFilters().configuration.scopes;
     },
 
     /**

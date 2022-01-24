@@ -5,12 +5,12 @@ namespace Spygar\Magento2\Connector\Export\Writer;
 use Spygar\Magento2\Services\SpygarMagento2Service;
 use Akeneo\Tool\Component\Batch\Step\StepExecutionAwareInterface;
 use Akeneo\Tool\Component\Batch\Model\StepExecution;
+use Akeneo\Tool\Component\Batch\Item\DataInvalidItem;
+
 /**
  * Add resources to Magento2
  *
  * @author    Spygar
- * @copyright 2010-2017 Spygar pvt. ltd.
- * @license   https://store.Spygar.com/license.html
  */
 
 class BaseWriter implements StepExecutionAwareInterface
@@ -28,13 +28,9 @@ class BaseWriter implements StepExecutionAwareInterface
     public function setStepExecution(StepExecution $stepExecution)
     {
         $this->stepExecution = $stepExecution;
-        if (!empty($this->connectorService) && $this->connectorService instanceof SpygarShopifyService) {
+        if (!empty($this->connectorService) && $this->connectorService instanceof SpygarMagento2Service) {
             $this->connectorService->setStepExecution($stepExecution);
         }
     }
 
-    public function checkMapping($code)
-    {
-
-    }
 }

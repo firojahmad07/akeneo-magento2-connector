@@ -1,14 +1,16 @@
 services:
     # job parameters 
-    spygar_datafiniti.job.job_parameters.product_import:
-        class: 'Spygar\Shopify\JobParameters\BaseJobParameter'
+    spygar_magento2.job.base.job_parameters:
+        class: Spygar\Magento2\JobParameters\BaseJobParameter
         public: true
         arguments:
             - '@pim_catalog.repository.channel'
             - '@pim_catalog.repository.locale'
             - '@spygar.magento2.credential.repository'
             - '@akeneo_pim_enrichment.job.job_parameters.constraint_collection_provider.simple_csv_import'
-            - [ '%spygar.shopify.category.export%' ]
+            - [ '%spygar_magento2.category.export%',
+                '%spygar_magento2.family.export%'
+              ]
         tags:
             - { name: akeneo_batch.job.job_parameters.constraint_collection_provider }
             - { name: akeneo_batch.job.job_parameters.default_values_provider }

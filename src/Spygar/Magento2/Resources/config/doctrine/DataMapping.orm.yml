@@ -24,7 +24,7 @@ Spygar\Magento2\Entity\DataMapping:
             nullable: true
             options:
                 default: null
-        shopUrl:
+        url:
             type: string
             length: 255
         created:

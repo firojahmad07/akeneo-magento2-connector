@@ -49,7 +49,7 @@ define(
                     return this;
                 }
 
-                fetcherRegistry.getFetcher('shopify-credentials').fetchAll().then(function (credentials) {
+                fetcherRegistry.getFetcher('magento2-credentials').fetchAll().then(function (credentials) {
                     console.log('credentials :' ,credentials);                   
                     var templateData = {
                         __: __,
@@ -84,6 +84,7 @@ define(
                     data.configuration.credential = credential;    
                     this.setData(data);
                 }
+                // this.getRoot().trigger('job:update-credentials:after', data.configuration.credential);
             },
             getActiveCredential: function() {
                 return this.getFormData().configuration.credential;  
